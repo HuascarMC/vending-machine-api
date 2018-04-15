@@ -13,23 +13,22 @@ import static junit.framework.Assert.assertEquals;
 
 public class TestChangeHandler {
 
-    List<Coin> change;
-
+    private List<Coin> change;
     @Before
     public void before() {
-     List<Coin> change = new ArrayList<>();
-     change.add(Coin.QUARTER);
-     change.add(Coin.DIME);
+     this.change = new ArrayList<>();
+     this.change.add(Coin.QUARTER);
+     this.change.add(Coin.DIME);
     }
 
-    @Test
-    public void testConvertToChange() {
-      assertEquals( this.change, ChangeHandler.convertToChange(0.35) );
-    }
+    // @Test
+    // public void testConvertToChange() {
+    //   assertEquals( this.change, ChangeHandler.convertToChange(0.35) );
+    // }
 
     @Test
-    public void testAmountToChange() {
-      assertEquals( 0.35, ChangeHandler.getChangeValue(this.change) );
+    public void testGetChangeValue() {
+      assertEquals( 0.35, (float) ChangeHandler.getChangeValue(this.change), 0.003 );
     }
 
 }
