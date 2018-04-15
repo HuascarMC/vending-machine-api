@@ -18,5 +18,15 @@ public class TestCoin {
       assertEquals( "0.65", Item.COKE.getPrice());
     }
 
+    @Test
+    public void testPEPSIhasName() {
+      assertEquals( "pepsi", Item.PEPSI.getName());
+    }
+
+    @Test
+    public void testPEPSIhasPrice() {
+      assertEquals( "1.00", Item.PEPSI.getPrice());
+    }
+
 
 }
