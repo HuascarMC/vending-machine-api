@@ -1,6 +1,6 @@
 package com.example.vendingmachine.api;
 
-import com.example.vendingmachine.api.vendingMachine.Objects.Coin;
+import vendingMachine.Objects.Coin;
 
 import org.junit.Test;
 
