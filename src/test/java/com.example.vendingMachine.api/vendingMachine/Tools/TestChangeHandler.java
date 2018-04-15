@@ -19,17 +19,18 @@ public class TestChangeHandler {
     public void before() {
      this.change = new ArrayList<>();
      this.change.add(Coin.QUARTER);
+     this.change.add(Coin.DIME);
 
     }
 
     @Test
     public void testConvertToChange() {
-      assertEquals( this.change, ChangeHandler.convertToChange(0.25) );
+      assertEquals( this.change, ChangeHandler.convertToChange(0.35) );
     }
 
     @Test
     public void testGetChangeValue() {
-      assertEquals( 0.25, (float) ChangeHandler.getChangeValue(this.change), 0.003 );
+      assertEquals( 0.35, (float) ChangeHandler.getChangeValue(this.change), 0.003 );
     }
 
 }

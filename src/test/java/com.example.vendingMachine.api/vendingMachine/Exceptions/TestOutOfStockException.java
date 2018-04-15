@@ -15,7 +15,6 @@ public class TestOutOfStockException {
     throw new OutOfStockException();
   }
 
-
   @Rule
   public ExpectedException expectedEx = ExpectedException.none();
 

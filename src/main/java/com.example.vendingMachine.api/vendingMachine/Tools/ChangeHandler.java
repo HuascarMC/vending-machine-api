@@ -1,6 +1,7 @@
 package vendingMachine.Tools;
 
 import vendingMachine.Objects.Coin;
+import vendingMachine.exceptions.NotEnoughChangeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,8 @@ public class ChangeHandler {
                   changes.add( Coin.NICKEL );
                   amountDecimal = amountDecimal.subtract(new BigDecimal(Coin.NICKEL.getValue()).setScale(2, RoundingMode.HALF_UP) );
               } else {
-                changes.add( Coin.PENNY );
+                // Dunno why without this exception the method gets stuck or returns the wrong change.
+                throw new NotEnoughChangeException();
               }
           }
 
