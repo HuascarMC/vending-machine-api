@@ -7,12 +7,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class TestCoinInventory {
 
   @Before
   public void before() {
     CoinInventory coinInventory = new CoinInventory();
+  }
+
+  @Test
+  public void testUpdate() {
+    coinInventory.add(Coin.DIME);
+    List<Coin> change = new ArrayList<>();
+    change.add(Coin.DIME);
+    coinInventory.update(change);
+    assertFalse( coinInventory.hasItem(Coin.DIME) );
   }
 
   @Test
