@@ -1,7 +1,7 @@
 package com.example.vendingMachine.api;
 
-import com.example.huascar.polymorphism.Objects.Coin;
-import com.example.huascar.polymorphism.components.CoinInventory;
+import vendingMachine.Objects.Coin;
+import vendingMachine.components.CoinInventory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,11 +9,16 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestCoinInventory {
+
+  private CoinInventory coinInventory;
 
   @Before
   public void before() {
-    CoinInventory coinInventory = new CoinInventory();
+    coinInventory = new CoinInventory();
   }
 
   @Test
@@ -27,15 +32,13 @@ public class TestCoinInventory {
 
   @Test
   public void testEnoughChange() {
-    CoinInventory coinInventory = new CoinInventory();
     coinInventory.add(Coin.NICKEL);
-    assertEquals(coinInventory.enoughChange(1), true);
+    assertEquals(coinInventory.enoughChange(0.05), true);
   }
 
   @Test
   public void testTotal() {
-    CoinInventory coinInventory = new CoinInventory();
     coinInventory.put(Coin.QUARTER, 5);
-    assertEquals(coinInventory.total(), 125);
+    assertEquals(coinInventory.total(), 1.25, 0.003);
   }
 }

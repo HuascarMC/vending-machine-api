@@ -1,4 +1,4 @@
-package com.vendingMachine.abstracts;
+package vendingMachine.abstracts;
 
 import vendingMachine.exceptions.OutOfStockException;
 
