@@ -1,6 +1,6 @@
 package com.vendingMachine.abstracts;
 
-import com.vendingMachine.exceptions.OutOfStockException;
+import vendingMachine.exceptions.OutOfStockException;
 
 import java.util.HashMap;
 import java.util.Map;
