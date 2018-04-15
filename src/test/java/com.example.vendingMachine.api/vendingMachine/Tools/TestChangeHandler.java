@@ -1,6 +1,6 @@
 package com.example.vendingmachine.api;
 
-import vendingMachine.Objects.ChangeHandler;
+import vendingMachine.Tools.ChangeHandler;
 import vendingMachine.Objects.Coin;
 
 import java.util.ArrayList;
@@ -13,6 +13,8 @@ import static junit.framework.Assert.assertEquals;
 
 public class TestChangeHandler {
 
+    List<Coin> change;
+
     @Before
     public void before() {
      List<Coin> change = new ArrayList<>();
@@ -20,7 +22,14 @@ public class TestChangeHandler {
      change.add(Coin.DIME);
     }
 
+    @Test
+    public void testConvertToChange() {
+      assertEquals( this.change, ChangeHandler.convertToChange(0.35) );
+    }
 
-
+    @Test
+    public void testAmountToChange() {
+      assertEquals( 0.35, ChangeHandler.getChangeValue(this.change) );
+    }
 
 }
