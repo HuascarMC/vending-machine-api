@@ -35,7 +35,17 @@ public class TestCoin {
 
     @Test
     public void testSODAhasPrice() {
-      assertEquals( "soda", Item.SODA.getPrice() );
+      assertEquals( 1.50, Item.SODA.getPrice() );
+    }
+
+    @Test
+    public void testWATERhasName() {
+      assertEquals( "water", Item.WATER.getName() );
+    }
+
+    @Test
+    public void testWATERhasPrice() {
+      assertEquals( 2.00, Item.WATER.getPrice() );
     }
 
 }
