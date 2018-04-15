@@ -10,23 +10,32 @@ public class TestCoin {
 
     @Test
     public void testCOKEhasName() {
-      assertEquals( "coke", Item.COKE.getName());
+      assertEquals( "coke", Item.COKE.getName() );
     }
 
     @Test
     public void testCOKEhasPrice() {
-      assertEquals( "0.65", Item.COKE.getPrice());
+      assertEquals( 0.65, Item.COKE.getPrice() );
     }
 
     @Test
     public void testPEPSIhasName() {
-      assertEquals( "pepsi", Item.PEPSI.getName());
+      assertEquals( "pepsi", Item.PEPSI.getName() );
     }
 
     @Test
     public void testPEPSIhasPrice() {
-      assertEquals( "1.00", Item.PEPSI.getPrice());
+      assertEquals( 1.00, Item.PEPSI.getPrice() );
     }
 
+    @Test
+    public void testSODAhasName() {
+      assertEquals( "soda", Item.SODA.getName() );
+    }
+
+    @Test
+    public void testSODAhasPrice() {
+      assertEquals( "soda", Item.SODA.getPrice() );
+    }
 
 }
