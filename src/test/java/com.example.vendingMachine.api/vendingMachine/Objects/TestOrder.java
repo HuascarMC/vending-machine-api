@@ -13,7 +13,7 @@ public class TestOrder {
 
   @Before
   public void before() {
-    Order order = new Order("coke", 5);
+    order = new Order("coke", 5);
   }
 
   @Test
