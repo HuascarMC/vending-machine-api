@@ -1,51 +1,51 @@
 package com.example.vendingmachine.api;
 
-import vendingMachine.Objects.Item;
+import vendingMachine.Objects.Drink;
 
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class TestCoin {
+public class TestDrink {
 
     @Test
     public void testCOKEhasName() {
-      assertEquals( "coke", Item.COKE.getName() );
+      assertEquals( "coke", Drink.COKE.getName() );
     }
 
     @Test
     public void testCOKEhasPrice() {
-      assertEquals( 0.65, Item.COKE.getPrice() );
+      assertEquals( 0.65, Drink.COKE.getPrice() );
     }
 
     @Test
     public void testPEPSIhasName() {
-      assertEquals( "pepsi", Item.PEPSI.getName() );
+      assertEquals( "pepsi", Drink.PEPSI.getName() );
     }
 
     @Test
     public void testPEPSIhasPrice() {
-      assertEquals( 1.00, Item.PEPSI.getPrice() );
+      assertEquals( 1.00, Drink.PEPSI.getPrice() );
     }
 
     @Test
     public void testSODAhasName() {
-      assertEquals( "soda", Item.SODA.getName() );
+      assertEquals( "soda", Drink.SODA.getName() );
     }
 
     @Test
     public void testSODAhasPrice() {
-      assertEquals( 1.50, Item.SODA.getPrice() );
+      assertEquals( 1.50, Drink.SODA.getPrice() );
     }
 
     @Test
     public void testWATERhasName() {
-      assertEquals( "water", Item.WATER.getName() );
+      assertEquals( "water", Drink.WATER.getName() );
     }
 
     @Test
     public void testWATERhasPrice() {
-      assertEquals( 2.00, Item.WATER.getPrice() );
+      assertEquals( 2.00, Drink.WATER.getPrice() );
     }
 
 }
