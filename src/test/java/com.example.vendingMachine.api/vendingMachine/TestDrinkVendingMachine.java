@@ -18,7 +18,7 @@
 // import static junit.framework.Assert.assertSame;
 // import static junit.framework.Assert.assertTrue;
 //
-// public class TestVendingMachine {
+// public class TestDrinkVendingMachine {
 //
 //   private Order cokeOrderChange;
 //   private Order pepsiOrderNoChange;
@@ -26,11 +26,11 @@
 //   private Order cokeOrderOutBalance;
 //   private Order sodaOrderOutChange;
 //
-//   private VendingMachine vendingMachine;
+//   private DrinkVendingMachine vendingMachine;
 //
 //   @Before
 //   public void before() {
-//     vendingMachine = new VendingMachine();
+//     vendingMachine = new DrinkVendingMachine();
 //
 //     cokeOrderChange = new Order("coke", 5);
 //     pepsiOrderNoChange = new Order("coke", 1);
