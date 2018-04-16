@@ -24,9 +24,9 @@ public class DrinkVendingMachine extends VendingMachine {
   @Override
     public Bucket<Enum, List<Coin>, State> vend(Order order) {
     Drink drink = (Drink) Drink.getDrinkByName((String) order.getItem());
-    long balance =  order.getBalance();
+    double balance =  order.getBalance();
 
-    long remainingBalance = balance -= drink.getPrice();
+    double remainingBalance = balance -= drink.getPrice();
 
     State state = new State(stockInventory.hasItem(drink), coinInventory.enoughChange(remainingBalance), remainingBalance >= 0 );
 

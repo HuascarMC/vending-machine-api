@@ -38,7 +38,7 @@ public class TestDrinkVendingMachine {
   public void before() {
     vendingMachine = new DrinkVendingMachine();
 
-    cokeOrderChange = new Order("coke", 5);
+    cokeOrderChange = new Order("coke", 1);
     pepsiOrderNoChange = new Order("coke", 1);
     sodaOrderOutStock = new Order("coke", 5);
     cokeOrderOutBalance = new Order("coke", 0);
@@ -51,13 +51,12 @@ public class TestDrinkVendingMachine {
 
     List<Coin> change = new ArrayList<>();
     change.add(Coin.QUARTER);
-    change.add(Coin.QUARTER);
-    change.add(Coin.QUARTER);
+    change.add(Coin.DIME);
 
     State state = new State(true, true, true);
 
     Bucket expectedResult = new Bucket<>(Drink.COKE, change, state);
-    Assert.assertTrue(EqualsBuilder.reflectionEquals( result, expectedResult ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), null ));
   }
 
   // @Test
