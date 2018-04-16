@@ -1,12 +1,15 @@
 package com.example.vendingMachine.api;
 
-import vendingMachine.Objects.Coin;
-import vendingMachine.Objects.Order;
 import vendingMachine.components.CoinInventory;
 import vendingMachine.components.Bucket;
 import vendingMachine.components.StockInventory;
+
+import vendingMachine.Objects.Order;
+import vendingMachine.Objects.Coin;
 import vendingMachine.Objects.Drink;
 import vendingMachine.Objects.State;
+
+import vendingMachine.DrinkVendingMachine;
 
 import org.junit.Before;
 import org.junit.Test;
