@@ -9,8 +9,16 @@ import vendingMachine.Objects.Coin;
 import vendingMachine.components.Bucket;
 import java.util.Map;
 
+import api.models.Item;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import javax.persistence.EntityManager;
+import javax.servlet.MultipartConfigElement;
+
 public class App {
   public static void main(String[] args) {
+    SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
     vm.stockInventory.put(Drink.SODA, 10);
     vm.coinInventory.put(Coin.QUARTER, 10);
