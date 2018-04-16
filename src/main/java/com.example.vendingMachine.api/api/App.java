@@ -4,27 +4,27 @@ public class App {
     public static void main(String[] args) {
     get("/", (request, response) -> {
       // Show something
-      return "";
+      return "get";
     });
 
     post("/", (request, response) -> {
       // Create something
-      return "";
+      return "post";
     });
 
     put("/", (request, response) -> {
       // Update something
-      return "";
+      return "put";
     });
 
     delete("/", (request, response) -> {
     // Annihilate something
-    return "";
+    return "delete";
     });
 
     options("/", (request, response) -> {
     // Appease something
-    return "";
+    return "options";
     });
   }
 }
