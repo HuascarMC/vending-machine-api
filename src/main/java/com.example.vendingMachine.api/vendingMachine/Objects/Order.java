@@ -3,9 +3,9 @@ package vendingMachine.Objects;
 public class Order{
 
     private String item;
-    private long balance;
+    private double balance;
 
-    public Order(String item, long balance) {
+    public Order(String item, double balance) {
         this.item = item;
         this.balance = balance;
     }
@@ -14,7 +14,7 @@ public class Order{
         return item;
     }
 
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
 }

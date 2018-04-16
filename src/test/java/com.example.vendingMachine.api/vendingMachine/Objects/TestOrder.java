@@ -23,7 +23,7 @@ public class TestOrder {
 
   @Test
   public void testOrderGetBalance() {
-    assertEquals( order.getBalance(), 5 );
+    assertEquals( order.getBalance(), 5.0);
   }
 
 
