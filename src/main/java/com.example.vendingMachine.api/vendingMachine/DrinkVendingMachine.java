@@ -28,7 +28,7 @@ public class DrinkVendingMachine extends VendingMachine {
 
     long remainingBalance = balance -= drink.getPrice();
 
-    State state = new State(stockInventory.hasDrink(drink), coinInventory.enoughChange(remainingBalance), remainingBalance >= 0 );
+    State state = new State(stockInventory.hasItem(drink), coinInventory.enoughChange(remainingBalance), remainingBalance >= 0 );
 
     if(state.possible()) {
       stockInventory.remove(drink);

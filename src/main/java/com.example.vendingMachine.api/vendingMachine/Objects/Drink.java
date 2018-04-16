@@ -18,4 +18,18 @@ public enum Drink {
     public double getPrice() {
         return price;
     }
+
+    public static Drink getDrinkByName(String name) {
+      switch (name) {
+          case "coke":
+                   return COKE;
+          case "pepsi":
+                   return PEPSI;
+          case "soda":
+                   return SODA;
+          case "water":
+                   return WATER;
+      }
+      return null;
+    }
 }
