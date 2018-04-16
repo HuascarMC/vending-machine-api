@@ -50,4 +50,11 @@ public class ChangeHandler {
       }
       return changes;
   }
+
+  public static double subtractPrice(double balance, double price) {
+    double result = balance - price;
+    BigDecimal resultDecimal = new BigDecimal(result).setScale(2, RoundingMode.HALF_UP);
+    double preciseResult = resultDecimal.doubleValue();
+    return preciseResult;
+  }
 }
