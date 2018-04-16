@@ -23,7 +23,6 @@ dependencies {
 
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
 
-
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 
