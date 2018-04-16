@@ -29,6 +29,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile "com.sparkjava:spark-core:2.7.2"
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
 }
 
 // In this section you declare where to find the dependencies of your project
