@@ -101,11 +101,21 @@ public class TestDrinkVendingMachine {
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
   }
 
-  // @Test
-  // public void testVendNotEnoughBalance() {
-  //   Bucket result = vendingMachine.vend(cokeOrderOutBalance);
-  // }
-  //
+  @Test
+  public void testVendNotEnoughBalance() {
+    Bucket result = vendingMachine.vend(cokeOrderOutBalance);
+
+    List<Coin> change = new ArrayList<>();
+
+    State state = new State(true, true, false);
+
+    Bucket expectedResult = new Bucket<>(null, change, state);
+
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+  }
+
   // @Test
   // public void testVendNotEnoughChange() {
   //   Bucket result = vendingMachine.vend(sodaOrderOutChange);
