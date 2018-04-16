@@ -21,12 +21,25 @@ public class DrinkVendingMachine extends VendingMachine {
     super();
   }
 
+
+  public void initialize() {
+    // Adds 5 coins of each coin enum type.
+    for(Coin coin : Coin.values()) {
+      coinInventory.put(coin, 5);
+    }
+    // Adds 5 items of each item enum type.
+    for(Drink item: Drink.values()) {
+      stockInventory.put(item ,5);
+    }
+  }
+
+
   @Override
-    public Bucket<Enum, List<Coin>, State> vend(Order order) {
+  public Bucket<Enum, List<Coin>, State> vend(Order order) {
     Drink drink = (Drink) Drink.getDrinkByName((String) order.getItem());
     double balance =  order.getBalance();
 
-    double remainingBalance = balance -= drink.getPrice();
+    double remainingBalance = balance - drink.getPrice();
 
     State state = new State(stockInventory.hasItem(drink), coinInventory.enoughChange(remainingBalance), remainingBalance >= 0 );
 
