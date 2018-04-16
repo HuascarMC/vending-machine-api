@@ -15,14 +15,13 @@ import java.util.List;
 
 public abstract class VendingMachine implements Vendable, Resetable {
 
-  private CoinInventory coinInventory;
-  private StockInventory stockInventory;
+  protected CoinInventory coinInventory;
+  protected StockInventory stockInventory;
 
   public VendingMachine() {
     coinInventory = new CoinInventory();
     stockInventory = new StockInventory();
   }
-
 
   public void reset() {
     coinInventory.clear();
