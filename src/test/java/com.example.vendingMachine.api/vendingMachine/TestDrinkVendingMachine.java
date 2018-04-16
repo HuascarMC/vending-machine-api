@@ -41,7 +41,7 @@ public class TestDrinkVendingMachine {
 
     cokeOrderChange = new Order("coke", 1);
     pepsiOrderNoChange = new Order("pepsi", 1);
-    sodaOrderOutStock = new Order("coke", 5);
+    sodaOrderOutStock = new Order("coke", 2);
     cokeOrderOutBalance = new Order("coke", 0);
     sodaOrderOutChange = new Order("coke", 50);
   }
@@ -78,11 +78,29 @@ public class TestDrinkVendingMachine {
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
   }
 
-  // @Test
-  // public void testVendNoStock() {
-  //   Bucket result = vendingMachine.vend(sodaOrderOutStock);
-  // }
-  //
+  @Test
+  public void testNoVendNoStock() {
+    vendingMachine.vend(sodaOrderOutStock);
+    vendingMachine.vend(sodaOrderOutStock);
+    vendingMachine.vend(sodaOrderOutStock);
+    vendingMachine.vend(sodaOrderOutStock);
+    vendingMachine.vend(sodaOrderOutStock);
+    Bucket result = vendingMachine.vend(sodaOrderOutStock);
+
+
+    List<Coin> change = new ArrayList<>();
+    change.add(Coin.DOLLAR);
+    change.add(Coin.DOLLAR);
+
+    State state = new State(false, true, true);
+
+    Bucket expectedResult = new Bucket<>(null, change, state);
+
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+  }
+
   // @Test
   // public void testVendNotEnoughBalance() {
   //   Bucket result = vendingMachine.vend(cokeOrderOutBalance);

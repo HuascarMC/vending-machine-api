@@ -6,37 +6,37 @@ import vendingMachine.exceptions.OutOfStockException;
 
 public class State {
 
-    public boolean coinInventoryState;
-    public boolean stockInventoryState;
-    public boolean balanceState;
+  public boolean coinInventoryState;
+  public boolean stockInventoryState;
+  public boolean balanceState;
 
-    public State(boolean coinInventoryState, boolean stockInventoryState, boolean balanceState) {
-        this.coinInventoryState = coinInventoryState;
-        this.stockInventoryState = stockInventoryState;
-        this.balanceState = balanceState;
+  public State(boolean stockInventoryState, boolean coinInventoryState, boolean balanceState) {
+    this.stockInventoryState = stockInventoryState;
+    this.coinInventoryState = coinInventoryState;
+    this.balanceState = balanceState;
+  }
+  public String getCoinInventoryState() {
+    if(coinInventoryState) {
+      return "OK";
     }
-    public String getCoinInventoryState() {
-        if(coinInventoryState) {
-            return "OK";
-        }
-        throw new NotEnoughChangeException();
-    }
+    throw new NotEnoughChangeException();
+  }
 
-    public String getStockInventoryState() {
-        if(stockInventoryState) {
-            return "OK";
-        }
-        throw new OutOfStockException();
+  public String getStockInventoryState() {
+    if(stockInventoryState) {
+      return "OK";
     }
+    throw new OutOfStockException();
+  }
 
-    public String getBalanceState() {
-        if(balanceState) {
-            return "OK";
-        }
-        throw new NotEnoughBalanceException();
+  public String getBalanceState() {
+    if(balanceState) {
+      return "OK";
     }
+    throw new NotEnoughBalanceException();
+  }
 
-    public boolean possible() {
-        return (coinInventoryState) && (stockInventoryState) && (balanceState);
-    }
+  public boolean possible() {
+    return (coinInventoryState) && (stockInventoryState) && (balanceState);
+  }
 }
