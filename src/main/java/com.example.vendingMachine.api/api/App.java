@@ -18,6 +18,7 @@ public class App {
       // could be static to prevent multiple instances.
       DrinkVendingMachine vm = new DrinkVendingMachine();
       Gson gson = new Gson();
+      
       Order order = (Order) gson.fromJson(request.body(), Order.class);
       Bucket result = vm.vend(order);
       return gson.toJson(result);
