@@ -4,21 +4,27 @@ import com.google.gson.Gson;
 
 import vendingMachine.DrinkVendingMachine;
 import vendingMachine.Objects.Order;
+import vendingMachine.Objects.Drink;
+import vendingMachine.Objects.Coin;
 import vendingMachine.components.Bucket;
+import java.util.Map;
 
 public class App {
   public static void main(String[] args) {
+    DrinkVendingMachine vm = new DrinkVendingMachine();
+    vm.stockInventory.put(Drink.SODA, 10);
+    vm.coinInventory.put(Coin.QUARTER, 10);
+
     get("/", (request, response) -> {
       // Show something
-      return "get";
+      Gson gson = new Gson();
+      Map stock = vm.stockInventory.getInventory();
+      return gson.toJson(stock);
     });
 
     post("/", (request, response) -> {
       // Create something
-      // could be static to prevent multiple instances.
-      DrinkVendingMachine vm = new DrinkVendingMachine();
       Gson gson = new Gson();
-      
       Order order = (Order) gson.fromJson(request.body(), Order.class);
       Bucket result = vm.vend(order);
       return gson.toJson(result);
