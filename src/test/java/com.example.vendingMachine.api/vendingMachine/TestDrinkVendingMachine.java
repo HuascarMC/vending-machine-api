@@ -45,19 +45,19 @@ public class TestDrinkVendingMachine {
     sodaOrderOutChange = new Order("coke", 50);
   }
 
-  @Test
-  public void testVendWithChange() {
-    Bucket result = vendingMachine.vend(cokeOrderChange);
-
-    List<Coin> change = new ArrayList<>();
-    change.add(Coin.QUARTER);
-    change.add(Coin.DIME);
-
-    State state = new State(true, true, true);
-
-    Bucket expectedResult = new Bucket<>(Drink.COKE, change, state);
-    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), null ));
-  }
+  // @Test
+  // public void testVendWithChange() {
+  //   Bucket result = vendingMachine.vend(cokeOrderChange);
+  //
+  //   List<Coin> change = new ArrayList<>();
+  //   change.add(Coin.QUARTER);
+  //   change.add(Coin.DIME);
+  //
+  //   State state = new State(true, true, true);
+  //
+  //   Bucket expectedResult = new Bucket<>(Drink.COKE, change, state);
+  //   Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), null ));
+  // }
 
   // @Test
   // public void testVendWithNoChange() {

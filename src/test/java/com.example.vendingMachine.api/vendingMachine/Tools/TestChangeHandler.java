@@ -30,7 +30,12 @@ public class TestChangeHandler {
 
     @Test
     public void testGetChangeValue() {
-      assertEquals( 0.35, (float) ChangeHandler.getChangeValue(this.change), 0.003 );
+      assertEquals( 0.35, (double) ChangeHandler.getChangeValue(this.change), 0.003 );
+    }
+
+    @Test
+    public void testSubtractPrice() {
+      assertEquals( 0.35, (double) ChangeHandler.subtractPrice(1, 0.65) );
     }
 
 }
