@@ -15,8 +15,8 @@ import java.util.List;
 
 public abstract class VendingMachine implements Vendable, Resetable {
 
-  protected CoinInventory coinInventory;
-  protected StockInventory stockInventory;
+  public CoinInventory coinInventory;
+  public StockInventory stockInventory;
 
   public VendingMachine() {
     coinInventory = new CoinInventory();

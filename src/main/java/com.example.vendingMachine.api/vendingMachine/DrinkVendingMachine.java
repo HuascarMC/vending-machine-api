@@ -25,7 +25,7 @@ public class DrinkVendingMachine extends VendingMachine {
   public void initialize() {
     // Adds 5 coins of each coin enum type.
     for(Coin coin : Coin.values()) {
-      coinInventory.put(coin, 15);
+      coinInventory.put(coin, 6);
     }
     // Adds 5 items of each item enum type.
     for(Drink item: Drink.values()) {
