@@ -53,4 +53,9 @@ public class TestDrink {
       assertEquals( Drink.COKE, Drink.getDrinkByName("coke") );
     }
 
+    @Test
+    public void testGetPEPSIByName() {
+      assertEquals( Drink.PEPSI, Drink.getDrinkByName("pepsi"))
+    }
+
 }
