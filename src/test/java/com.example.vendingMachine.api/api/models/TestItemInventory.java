@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.Before;
 import api.models.Item;
 
-public class TestItem {
+public class TestItemInventory {
 
   private Item item = new Item();
 
