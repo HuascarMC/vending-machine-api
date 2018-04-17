@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 
 @Entity
 @Table(name="item")
@@ -21,7 +22,7 @@ public class Item {
     String name;
 
     @Column(name = "quantity")
-    @OneToMany(mappedBy = "name")
+    @OneToMany(mappedBy = "name", fetch = FetchType.EAGER)
     Integer quantity;
 
     @Id
