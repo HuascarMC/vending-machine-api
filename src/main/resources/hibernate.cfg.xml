@@ -18,6 +18,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping class="api.models.Item" />
+        <mapping class="api.models.Coin" />
     </session-factory>
 
 </hibernate-configuration>

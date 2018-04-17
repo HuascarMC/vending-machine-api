@@ -28,8 +28,6 @@ public class App {
     DrinkVendingMachine vm = new DrinkVendingMachine();
 
 
-    vm.stockInventory.put(Drink.SODA, 10);
-    vm.coinInventory.put(Coin.QUARTER, 10);
 
     get("/items", (request, response) -> {
       // Show something
