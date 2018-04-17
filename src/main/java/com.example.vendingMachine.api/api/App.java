@@ -11,6 +11,8 @@ import vendingMachine.Objects.Coin;
 import vendingMachine.components.Bucket;
 import java.util.Map;
 
+import api.Tools.CorsFilter;
+
 import api.models.DBItem;
 import api.models.DBCoin;
 
@@ -29,8 +31,8 @@ public class App {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
     vm.initialize();
-
-
+CorsFilter corsFilter = new CorsFilter();
+corsFilter.apply();
         get("/cointemp", (request, response) -> {
           // Show something
           Gson gson = new Gson();
@@ -206,7 +208,7 @@ public class App {
     post("/items", (request, response) -> {
       // Create something
       Gson gson = new Gson();
-      
+
       // Order order = (Order) gson.fromJson(request.body(), Order.class);
       // Bucket result = vm.vend(order);
       // return gson.toJson(result);
