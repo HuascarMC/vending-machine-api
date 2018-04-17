@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.MultipartConfigElement;
 import javax.persistence.Query;
 
+
 import java.util.List;
 
 public class App {
@@ -72,13 +73,23 @@ public class App {
              if (session.isOpen()) {
                  session.close();
              }
-             
+
          }
     });
 
-    put("/", (request, response) -> {
+    put("/item/", (request, response) -> {
       // Update something
-      return "put";
+      EntityManager session = sf.createEntityManager();
+      Gson gson = new Gson();
+
+      String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
+      Item item = (Item) session.createQuery(query).getSingleResult();
+      item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
+      session.getTransaction().begin();
+      session.merge(item);
+      session.getTransaction().commit();
+      session.close();
+      return gson.toJson(item);
     });
 
     delete("/items", (request, response) -> {
