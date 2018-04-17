@@ -18,6 +18,8 @@ import org.hibernate.cfg.Configuration;
 import javax.persistence.EntityManager;
 import javax.servlet.MultipartConfigElement;
 
+import java.util.List;
+
 public class App {
   public static void main(String[] args) {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
@@ -31,8 +33,21 @@ public class App {
     get("/", (request, response) -> {
       // Show something
       Gson gson = new Gson();
-      Map stock = vm.stockInventory.getInventory();
-      return gson.toJson(stock);
+      // Map stock = vm.stockInventory.getInventory();
+      // return gson.toJson(stock);
+      EntityManager session = sf.createEntityManager();
+            try {
+                List<Item> items = session.createQuery("FROM Item").getResultList();
+                return gson.toJson(items);
+
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            } finally {
+                if (session.isOpen()) {
+                    session.close();
+                }
+            }
+
     });
 
     post("/", (request, response) -> {
