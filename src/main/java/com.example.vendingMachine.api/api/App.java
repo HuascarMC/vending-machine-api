@@ -55,16 +55,11 @@ public class App {
       // Order order = (Order) gson.fromJson(request.body(), Order.class);
       // Bucket result = vm.vend(order);
       // return gson.toJson(result);
-      Item item = new Item();
       EntityManager session = sf.createEntityManager();
          try {
              request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
 
-             String name = request.queryParams("name");
-             Integer quantity = Integer.parseInt(request.queryParams("quantity"));
-
-             item.setName(name);
-             item.setQuantity(quantity);
+             Item item = (Item) gson.fromJson(request.body(), Item.class);
 
              session.getTransaction().begin();
              session.persist(item);
@@ -72,8 +67,7 @@ public class App {
 
              return gson.toJson(item);
          } catch (Exception e) {
-           return gson.toJson(item);
-             // return "Error: " + e.getMessage();
+             return "Error: " + e.getMessage();
          } finally {
              if (session.isOpen()) {
                  session.close();
