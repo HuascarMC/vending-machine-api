@@ -12,6 +12,8 @@ import vendingMachine.components.Bucket;
 import java.util.Map;
 
 import api.models.Item;
+import api.models.DBCoin;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -27,6 +29,97 @@ public class App {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
 
+    get("/coins", (request, response) -> {
+      // Show something
+      Gson gson = new Gson();
+      // Map stock = vm.stockInventory.getInventory();
+      // return gson.toJson(stock);
+      EntityManager session = sf.createEntityManager();
+      try {
+        List<Coin> items = session.createQuery("FROM Coin").getResultList();
+        return gson.toJson(items);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+      }
+
+    });
+
+    // post("/coins", (request, response) -> {
+    //   // Create something
+    //   Gson gson = new Gson();
+    //   // Order order = (Order) gson.fromJson(request.body(), Order.class);
+    //   // Bucket result = vm.vend(order);
+    //   // return gson.toJson(result);
+    //   EntityManager session = sf.createEntityManager();
+    //   try {
+    //     request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+    //
+    //     Item item = (Item) gson.fromJson(request.body(), Item.class);
+    //
+    //     session.getTransaction().begin();
+    //     session.persist(item);
+    //     session.getTransaction().commit();
+    //
+    //     return gson.toJson(item);
+    //   } catch (Exception e) {
+    //     return "Error: " + e.getMessage();
+    //   } finally {
+    //     if (session.isOpen()) {
+    //       session.close();
+    //     }
+    //
+    //   }
+    // });
+    //
+    // put("/coins", (request, response) -> {
+    //   // Update something
+    //   EntityManager session = sf.createEntityManager();
+    //   try{
+    //     Gson gson = new Gson();
+    //
+    //     String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
+    //     Item item = (Item) session.createQuery(query).getSingleResult();
+    //     item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
+    //     session.getTransaction().begin();
+    //     session.merge(item);
+    //     session.getTransaction().commit();
+    //     return gson.toJson(item);
+    //   } catch(Exception e) {
+    //     return "Error: " + e.getMessage();
+    //   } finally {
+    //     if(session.isOpen()) {
+    //       session.close();
+    //     }
+    //   }
+    // });
+    //
+    // delete("/coins", (request, response) -> {
+    //   // Annihilate something
+    //   // Create something
+    //   Gson gson = new Gson();
+    //   // Order order = (Order) gson.fromJson(request.body(), Order.class);
+    //   // Bucket result = vm.vend(order);
+    //   // return gson.toJson(result);
+    //   EntityManager session = sf.createEntityManager();
+    //   try {
+    //     request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+    //     session.getTransaction().begin();
+    //     session.createQuery("DELETE FROM Item").executeUpdate();
+    //     session.getTransaction().commit();
+    //     return "OK";
+    //   } catch (Exception e) {
+    //     return "Error: " + e.getMessage();
+    //   } finally {
+    //     if (session.isOpen()) {
+    //       session.close();
+    //     }
+    //   }
+    // });
+
 
 
     get("/items", (request, response) -> {
@@ -35,16 +128,16 @@ public class App {
       // Map stock = vm.stockInventory.getInventory();
       // return gson.toJson(stock);
       EntityManager session = sf.createEntityManager();
-            try {
-                List<Item> items = session.createQuery("FROM Item").getResultList();
-                return gson.toJson(items);
-            } catch (Exception e) {
-                return "Error: " + e.getMessage();
-            } finally {
-                if (session.isOpen()) {
-                    session.close();
-                }
-            }
+      try {
+        List<Item> items = session.createQuery("FROM Item").getResultList();
+        return gson.toJson(items);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+      }
 
     });
 
@@ -55,46 +148,46 @@ public class App {
       // Bucket result = vm.vend(order);
       // return gson.toJson(result);
       EntityManager session = sf.createEntityManager();
-         try {
-             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
 
-             Item item = (Item) gson.fromJson(request.body(), Item.class);
+        Item item = (Item) gson.fromJson(request.body(), Item.class);
 
-             session.getTransaction().begin();
-             session.persist(item);
-             session.getTransaction().commit();
+        session.getTransaction().begin();
+        session.persist(item);
+        session.getTransaction().commit();
 
-             return gson.toJson(item);
-         } catch (Exception e) {
-             return "Error: " + e.getMessage();
-         } finally {
-             if (session.isOpen()) {
-                 session.close();
-             }
+        return gson.toJson(item);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
 
-         }
+      }
     });
 
     put("/items", (request, response) -> {
       // Update something
       EntityManager session = sf.createEntityManager();
-        try{
-          Gson gson = new Gson();
+      try{
+        Gson gson = new Gson();
 
-          String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
-          Item item = (Item) session.createQuery(query).getSingleResult();
-          item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
-          session.getTransaction().begin();
-          session.merge(item);
-          session.getTransaction().commit();
-          return gson.toJson(item);
-        } catch(Exception e) {
-          return "Error: " + e.getMessage();
-        } finally {
-          if(session.isOpen()) {
-            session.close();
-          }
+        String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
+        Item item = (Item) session.createQuery(query).getSingleResult();
+        item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
+        session.getTransaction().begin();
+        session.merge(item);
+        session.getTransaction().commit();
+        return gson.toJson(item);
+      } catch(Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if(session.isOpen()) {
+          session.close();
         }
+      }
     });
 
     delete("/items", (request, response) -> {
@@ -105,19 +198,19 @@ public class App {
       // Bucket result = vm.vend(order);
       // return gson.toJson(result);
       EntityManager session = sf.createEntityManager();
-         try {
-             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-             session.getTransaction().begin();
-             session.createQuery("DELETE FROM Item").executeUpdate();
-             session.getTransaction().commit();
-             return "OK";
-         } catch (Exception e) {
-             return "Error: " + e.getMessage();
-         } finally {
-             if (session.isOpen()) {
-                 session.close();
-             }
-         }
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+        session.getTransaction().begin();
+        session.createQuery("DELETE FROM Item").executeUpdate();
+        session.getTransaction().commit();
+        return "OK";
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+      }
     });
 
     options("/options", (request, response) -> {

@@ -11,7 +11,7 @@ import javax.persistence.FetchType;
 
 @Entity
 @Table(name="coin")
-public class Coin {
+public class DBCoin {
 
     @Id
     @Column(name = "id")

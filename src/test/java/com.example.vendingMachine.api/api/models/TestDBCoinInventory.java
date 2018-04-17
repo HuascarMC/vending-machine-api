@@ -5,11 +5,11 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.Before;
-import api.models.Coin;
+import api.models.DBCoin;
 
-public class TestCoinInventory {
+public class TestDBCoinInventory {
 
-  private Coin item = new Coin();
+  private DBCoin item = new DBCoin();
 
   @Before
   public void before() {
