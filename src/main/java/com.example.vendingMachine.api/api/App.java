@@ -55,25 +55,25 @@ public class App {
       // Order order = (Order) gson.fromJson(request.body(), Order.class);
       // Bucket result = vm.vend(order);
       // return gson.toJson(result);
+      Item item = new Item();
       EntityManager session = sf.createEntityManager();
          try {
-             // request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-             //
-             // String name = request.queryParams("name");
-             // Integer quantity = Integer.parseInt(request.queryParams("quantity"));
-             //
-             // Item item = new Item();
-             // item.setId(item.getId());
-             // item.setName(name);
-             // item.setQuantity(quantity);
+             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+
+             String name = request.queryParams("name");
+             Integer quantity = Integer.parseInt(request.queryParams("quantity"));
+
+             item.setName(name);
+             item.setQuantity(quantity);
 
              session.getTransaction().begin();
-             // session.persist(item);
-             // session.getTransaction().commit();
+             session.persist(item);
+             session.getTransaction().commit();
 
-             return "hi";
+             return gson.toJson(item);
          } catch (Exception e) {
-             return "Error: " + e.getMessage();
+           return gson.toJson(item);
+             // return "Error: " + e.getMessage();
          } finally {
              if (session.isOpen()) {
                  session.close();

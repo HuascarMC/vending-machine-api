@@ -15,18 +15,15 @@ public class Item {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     int id;
 
     @Column(name = "name")
     String name;
 
     @Column(name = "quantity")
-    @OneToMany(mappedBy = "name", fetch = FetchType.EAGER)
     Integer quantity;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
