@@ -74,29 +74,29 @@ public class App {
 
       }
     });
-    //
-    // put("/coins", (request, response) -> {
-    //   // Update something
-    //   EntityManager session = sf.createEntityManager();
-    //   try{
-    //     Gson gson = new Gson();
-    //
-    //     String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
-    //     Item item = (Item) session.createQuery(query).getSingleResult();
-    //     item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
-    //     session.getTransaction().begin();
-    //     session.merge(item);
-    //     session.getTransaction().commit();
-    //     return gson.toJson(item);
-    //   } catch(Exception e) {
-    //     return "Error: " + e.getMessage();
-    //   } finally {
-    //     if(session.isOpen()) {
-    //       session.close();
-    //     }
-    //   }
-    // });
-    //
+
+    put("/coins", (request, response) -> {
+      // Update something
+      EntityManager session = sf.createEntityManager();
+      try{
+        Gson gson = new Gson();
+
+        String query = String.format("FROM DBCoin WHERE name = '%s'", request.queryParams("name"));
+        DBCoin coin = (DBCoin) session.createQuery(query).getSingleResult();
+        coin.setQuantity(Integer.parseInt(request.queryParams("quantity")));
+        session.getTransaction().begin();
+        session.merge(coin);
+        session.getTransaction().commit();
+        return gson.toJson(coin);
+      } catch(Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if(session.isOpen()) {
+          session.close();
+        }
+      }
+    });
+
     // delete("/coins", (request, response) -> {
     //   // Annihilate something
     //   // Create something
