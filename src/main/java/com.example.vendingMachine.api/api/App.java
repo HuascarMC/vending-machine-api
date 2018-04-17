@@ -36,7 +36,7 @@ public class App {
       // return gson.toJson(stock);
       EntityManager session = sf.createEntityManager();
       try {
-        List<Coin> items = session.createQuery("FROM Coin").getResultList();
+        List<Coin> items = session.createQuery("FROM DBCoin").getResultList();
         return gson.toJson(items);
       } catch (Exception e) {
         return "Error: " + e.getMessage();
