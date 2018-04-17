@@ -28,6 +28,28 @@ public class App {
   public static void main(String[] args) {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
+    vm.initialize();
+
+
+        post("/order", (request, response) -> {
+          // Create something
+          Gson gson = new Gson();
+
+          EntityManager session = sf.createEntityManager();
+          try {
+            Order order = (Order) gson.fromJson(request.body(), Order.class);
+            Bucket result = vm.vend(order);
+            return gson.toJson(result);
+          } catch (Exception e) {
+            return "Error: " + e.getMessage();
+          } finally {
+            if (session.isOpen()) {
+              session.close();
+            }
+
+          }
+        });
+
 
     get("/coins", (request, response) -> {
       // Show something
