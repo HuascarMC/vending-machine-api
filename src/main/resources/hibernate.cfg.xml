@@ -17,7 +17,7 @@
         </property>
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="com.example.vendingMachine.api.api.models.Item" />
+        <mapping class="api.models.Item" />
     </session-factory>
 
 </hibernate-configuration>
