@@ -97,28 +97,28 @@ public class App {
       }
     });
 
-    // delete("/coins", (request, response) -> {
-    //   // Annihilate something
-    //   // Create something
-    //   Gson gson = new Gson();
-    //   // Order order = (Order) gson.fromJson(request.body(), Order.class);
-    //   // Bucket result = vm.vend(order);
-    //   // return gson.toJson(result);
-    //   EntityManager session = sf.createEntityManager();
-    //   try {
-    //     request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-    //     session.getTransaction().begin();
-    //     session.createQuery("DELETE FROM Item").executeUpdate();
-    //     session.getTransaction().commit();
-    //     return "OK";
-    //   } catch (Exception e) {
-    //     return "Error: " + e.getMessage();
-    //   } finally {
-    //     if (session.isOpen()) {
-    //       session.close();
-    //     }
-    //   }
-    // });
+    delete("/coins", (request, response) -> {
+      // Annihilate something
+      // Create something
+      Gson gson = new Gson();
+      // Order order = (Order) gson.fromJson(request.body(), Order.class);
+      // Bucket result = vm.vend(order);
+      // return gson.toJson(result);
+      EntityManager session = sf.createEntityManager();
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+        session.getTransaction().begin();
+        session.createQuery("DELETE FROM DBCoin").executeUpdate();
+        session.getTransaction().commit();
+        return "OK";
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+      }
+    });
 
 
 
