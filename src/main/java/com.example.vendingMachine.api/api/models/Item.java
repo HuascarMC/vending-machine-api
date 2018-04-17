@@ -8,13 +8,14 @@ import javax.persistence.GeneratedValue;
 @Entity
 @Table(name="item", schema = "public")
 public class Item {
-
+  
+    @Id
     @GeneratedValue
     int id;
     String name;
     int quantity;
 
-    @Id
+
     public int getId() {
         return id;
     }

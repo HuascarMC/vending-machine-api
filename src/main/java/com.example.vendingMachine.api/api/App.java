@@ -1,3 +1,5 @@
+package api;
+
 import static spark.Spark.*;
 
 import com.google.gson.Gson;
@@ -19,7 +21,10 @@ import javax.servlet.MultipartConfigElement;
 public class App {
   public static void main(String[] args) {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    staticFiles.location("/public");
     DrinkVendingMachine vm = new DrinkVendingMachine();
+
+
     vm.stockInventory.put(Drink.SODA, 10);
     vm.coinInventory.put(Coin.QUARTER, 10);
 
@@ -36,6 +41,7 @@ public class App {
       Order order = (Order) gson.fromJson(request.body(), Order.class);
       Bucket result = vm.vend(order);
       return gson.toJson(result);
+
     });
 
     put("/", (request, response) -> {
