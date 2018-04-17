@@ -8,12 +8,12 @@ import javax.persistence.GeneratedValue;
 @Entity
 @Table(name="item", schema = "public")
 public class Item {
-  
+
     @Id
     @GeneratedValue
     int id;
     String name;
-    int quantity;
+    Integer quantity;
 
 
     public int getId() {
@@ -32,11 +32,11 @@ public class Item {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
       return this.quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
       this.quantity = quantity;
     }
 }
