@@ -72,6 +72,7 @@ public class App {
              if (session.isOpen()) {
                  session.close();
              }
+             
          }
     });
 
