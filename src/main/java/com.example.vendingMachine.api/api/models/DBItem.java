@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.FetchType;
 
 @Entity
-@Table(name="item")
-public class Item {
+@Table(name="DBItem")
+public class DBItem {
 
     @Id
     @Column(name = "id")

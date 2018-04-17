@@ -17,7 +17,7 @@
         </property>
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="api.models.Item" />
+        <mapping class="api.models.DBItem" />
         <mapping class="api.models.DBCoin" />
     </session-factory>
 

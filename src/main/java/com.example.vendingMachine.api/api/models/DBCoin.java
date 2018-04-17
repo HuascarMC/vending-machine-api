@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.FetchType;
 
 @Entity
-@Table(name="coin")
+@Table(name="DBCoin")
 public class DBCoin {
 
     @Id

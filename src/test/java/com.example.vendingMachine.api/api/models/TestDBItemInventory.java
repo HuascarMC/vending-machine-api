@@ -5,11 +5,11 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.Before;
-import api.models.Item;
+import api.models.DBItem;
 
-public class TestItemInventory {
+public class TestDBItemInventory {
 
-  private Item item = new Item();
+  private DBItem item = new DBItem();
 
   @Before
   public void before() {

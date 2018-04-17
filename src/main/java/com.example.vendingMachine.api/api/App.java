@@ -11,7 +11,7 @@ import vendingMachine.Objects.Coin;
 import vendingMachine.components.Bucket;
 import java.util.Map;
 
-import api.models.Item;
+import api.models.DBItem;
 import api.models.DBCoin;
 
 import org.hibernate.SessionFactory;
@@ -29,6 +29,46 @@ public class App {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
     vm.initialize();
+
+
+        get("/cointemp", (request, response) -> {
+          // Show something
+          Gson gson = new Gson();
+          // Map stock = vm.stockInventory.getInventory();
+          // return gson.toJson(stock);
+              EntityManager session = sf.createEntityManager();
+          try {
+            Map<Coin, Integer> coins = vm.coinInventory.getInventory();
+            return gson.toJson(coins);
+          } catch (Exception e) {
+            return "Error: " + e.getMessage();
+          } finally {
+            if (session.isOpen()) {
+              session.close();
+            }
+          }
+
+        });
+
+        get("/itemtemp", (request, response) -> {
+          // Show something
+          Gson gson = new Gson();
+          // Map stock = vm.stockInventory.getInventory();
+          // return gson.toJson(stock);
+              EntityManager session = sf.createEntityManager();
+          try {
+            Map<Drink, Integer> items = vm.stockInventory.getInventory();
+            return gson.toJson(items);
+          } catch (Exception e) {
+            return "Error: " + e.getMessage();
+          } finally {
+            if (session.isOpen()) {
+              session.close();
+            }
+          }
+
+        });
+
 
 
         post("/order", (request, response) -> {
@@ -151,7 +191,7 @@ public class App {
       // return gson.toJson(stock);
       EntityManager session = sf.createEntityManager();
       try {
-        List<Item> items = session.createQuery("FROM Item").getResultList();
+        List<DBItem> items = session.createQuery("FROM Item").getResultList();
         return gson.toJson(items);
       } catch (Exception e) {
         return "Error: " + e.getMessage();
@@ -173,7 +213,7 @@ public class App {
       try {
         request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
 
-        Item item = (Item) gson.fromJson(request.body(), Item.class);
+        DBItem item = (DBItem) gson.fromJson(request.body(), DBItem.class);
 
         session.getTransaction().begin();
         session.persist(item);
@@ -197,7 +237,7 @@ public class App {
         Gson gson = new Gson();
 
         String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
-        Item item = (Item) session.createQuery(query).getSingleResult();
+        DBItem item = (DBItem) session.createQuery(query).getSingleResult();
         item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
         session.getTransaction().begin();
         session.merge(item);
