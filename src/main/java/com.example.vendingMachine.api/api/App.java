@@ -17,6 +17,7 @@ import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.servlet.MultipartConfigElement;
+import javax.persistence.Query;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class App {
     vm.stockInventory.put(Drink.SODA, 10);
     vm.coinInventory.put(Coin.QUARTER, 10);
 
-    get("/", (request, response) -> {
+    get("/items", (request, response) -> {
       // Show something
       Gson gson = new Gson();
       // Map stock = vm.stockInventory.getInventory();
@@ -38,7 +39,6 @@ public class App {
             try {
                 List<Item> items = session.createQuery("FROM Item").getResultList();
                 return gson.toJson(items);
-
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             } finally {
@@ -49,7 +49,7 @@ public class App {
 
     });
 
-    post("/", (request, response) -> {
+    post("/items", (request, response) -> {
       // Create something
       Gson gson = new Gson();
       // Order order = (Order) gson.fromJson(request.body(), Order.class);
@@ -80,9 +80,27 @@ public class App {
       return "put";
     });
 
-    delete("/", (request, response) -> {
+    delete("/items", (request, response) -> {
       // Annihilate something
-      return "delete";
+      // Create something
+      Gson gson = new Gson();
+      // Order order = (Order) gson.fromJson(request.body(), Order.class);
+      // Bucket result = vm.vend(order);
+      // return gson.toJson(result);
+      EntityManager session = sf.createEntityManager();
+         try {
+             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+             session.getTransaction().begin();
+             session.createQuery("DELETE FROM Item").executeUpdate();
+             session.getTransaction().commit();
+             return "OK";
+         } catch (Exception e) {
+             return "Error: " + e.getMessage();
+         } finally {
+             if (session.isOpen()) {
+                 session.close();
+             }
+         }
     });
 
     options("/", (request, response) -> {
