@@ -48,32 +48,32 @@ public class App {
 
     });
 
-    // post("/coins", (request, response) -> {
-    //   // Create something
-    //   Gson gson = new Gson();
-    //   // Order order = (Order) gson.fromJson(request.body(), Order.class);
-    //   // Bucket result = vm.vend(order);
-    //   // return gson.toJson(result);
-    //   EntityManager session = sf.createEntityManager();
-    //   try {
-    //     request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-    //
-    //     Item item = (Item) gson.fromJson(request.body(), Item.class);
-    //
-    //     session.getTransaction().begin();
-    //     session.persist(item);
-    //     session.getTransaction().commit();
-    //
-    //     return gson.toJson(item);
-    //   } catch (Exception e) {
-    //     return "Error: " + e.getMessage();
-    //   } finally {
-    //     if (session.isOpen()) {
-    //       session.close();
-    //     }
-    //
-    //   }
-    // });
+    post("/coins", (request, response) -> {
+      // Create something
+      Gson gson = new Gson();
+      // Order order = (Order) gson.fromJson(request.body(), Order.class);
+      // Bucket result = vm.vend(order);
+      // return gson.toJson(result);
+      EntityManager session = sf.createEntityManager();
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+
+        DBCoin coin = (DBCoin) gson.fromJson(request.body(), DBCoin.class);
+
+        session.getTransaction().begin();
+        session.persist(coin);
+        session.getTransaction().commit();
+
+        return gson.toJson(coin);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+
+      }
+    });
     //
     // put("/coins", (request, response) -> {
     //   // Update something
