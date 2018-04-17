@@ -23,7 +23,7 @@ public class TestItem {
     }
 
     @Test
-    public void testQuantityIn() {
+    public void testQuantity() {
         assertEquals( Integer.valueOf(1), item.getQuantity());
     }
 

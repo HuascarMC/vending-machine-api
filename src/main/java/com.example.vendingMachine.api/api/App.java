@@ -77,7 +77,7 @@ public class App {
          }
     });
 
-    put("/item/", (request, response) -> {
+    put("/items", (request, response) -> {
       // Update something
       EntityManager session = sf.createEntityManager();
         try{
@@ -122,7 +122,7 @@ public class App {
          }
     });
 
-    options("/", (request, response) -> {
+    options("/options", (request, response) -> {
       // Appease something
       return "options";
     });
