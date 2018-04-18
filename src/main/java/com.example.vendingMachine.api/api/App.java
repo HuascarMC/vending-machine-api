@@ -34,6 +34,25 @@ public class App {
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
 
+    post("/order", (request, response) -> {
+      // Create something
+      Gson gson = new Gson();
+
+      EntityManager session = sf.createEntityManager();
+      try {
+        Order order = (Order) gson.fromJson(request.body(), Order.class);
+        Bucket result = vm.vend(order);
+        return gson.toJson(result);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+
+      }
+    });
+
     get("/cointemp", (request, response) -> {
       // Show something
       Gson gson = new Gson();
@@ -74,25 +93,6 @@ public class App {
 
 
 
-    post("/order", (request, response) -> {
-      // Create something
-      Gson gson = new Gson();
-
-      EntityManager session = sf.createEntityManager();
-      try {
-        System.out.print("hi");
-        Order order = (Order) gson.fromJson(request.body(), Order.class);
-        Bucket result = vm.vend(order);
-        return gson.toJson(result);
-      } catch (Exception e) {
-        return "Error: " + e.getMessage();
-      } finally {
-        if (session.isOpen()) {
-          session.close();
-        }
-
-      }
-    });
 
     get("/machine/:inventory", (request, response) -> {
 

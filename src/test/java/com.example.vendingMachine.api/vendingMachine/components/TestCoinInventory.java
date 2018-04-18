@@ -50,6 +50,16 @@ public class TestCoinInventory {
   }
 
   @Test
+  public void testEnoughChangeCase3() {
+    coinInventory.put(Coin.DOLLAR, 5);
+    coinInventory.put(Coin.QUARTER, 5);
+    coinInventory.put(Coin.DIME, 5);
+    coinInventory.put(Coin.NICKEL, 5);
+    coinInventory.put(Coin.PENNY, 5);
+    assertEquals(coinInventory.enoughChange(1.67), true);
+  }
+
+  @Test
   public void testTotalCase2() {
     coinInventory.put(Coin.DOLLAR, 5);
     coinInventory.put(Coin.QUARTER, 5);
