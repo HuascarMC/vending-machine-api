@@ -33,6 +33,7 @@ public class App {
     vm.initialize();
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
+
     get("/cointemp", (request, response) -> {
       // Show something
       Gson gson = new Gson();
@@ -93,19 +94,20 @@ public class App {
       }
     });
 
+    get("/machine/:inventory", (request, response) -> {
 
-    get("/coins", (request, response) -> {
-      // Show something
       Gson gson = new Gson();
-      // Map stock = vm.stockInventory.getInventory();
-      // return gson.toJson(stock);
       EntityManager session = sf.createEntityManager();
+
       try {
-        List<Coin> items = session.createQuery("FROM DBCoin").getResultList();
+        List<Coin> items = session.createQuery("FROM " + request.params(":inventory")).getResultList();
         return gson.toJson(items);
+
       } catch (Exception e) {
+
         return "Error: " + e.getMessage();
       } finally {
+
         if (session.isOpen()) {
           session.close();
         }
@@ -113,7 +115,7 @@ public class App {
 
     });
 
-    post("/coins", (request, response) -> {
+    post("/machine/DBCoin", (request, response) -> {
       // Create something
       Gson gson = new Gson();
       // Order order = (Order) gson.fromJson(request.body(), Order.class);
@@ -122,7 +124,6 @@ public class App {
       EntityManager session = sf.createEntityManager();
       try {
         request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-
         DBCoin coin = (DBCoin) gson.fromJson(request.body(), DBCoin.class);
 
         session.getTransaction().begin();
@@ -140,7 +141,7 @@ public class App {
       }
     });
 
-    put("/coins", (request, response) -> {
+    put("/machine/DBCoin", (request, response) -> {
       // Update something
       EntityManager session = sf.createEntityManager();
       try{
@@ -162,7 +163,7 @@ public class App {
       }
     });
 
-    delete("/coins", (request, response) -> {
+    delete("/machine/:inventory", (request, response) -> {
       // Annihilate something
       // Create something
       Gson gson = new Gson();
@@ -173,7 +174,7 @@ public class App {
       try {
         request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
         session.getTransaction().begin();
-        session.createQuery("DELETE FROM DBCoin").executeUpdate();
+        session.createQuery("DELETE FROM " + request.params(":inventory")).executeUpdate();
         session.getTransaction().commit();
         return "OK";
       } catch (Exception e) {
@@ -185,28 +186,7 @@ public class App {
       }
     });
 
-
-
-    get("/items", (request, response) -> {
-      // Show something
-      Gson gson = new Gson();
-      // Map stock = vm.stockInventory.getInventory();
-      // return gson.toJson(stock);
-      EntityManager session = sf.createEntityManager();
-      try {
-        List<DBItem> items = session.createQuery("FROM Item").getResultList();
-        return gson.toJson(items);
-      } catch (Exception e) {
-        return "Error: " + e.getMessage();
-      } finally {
-        if (session.isOpen()) {
-          session.close();
-        }
-      }
-
-    });
-
-    post("/items", (request, response) -> {
+    post("/machine/DBItem", (request, response) -> {
       // Create something
       Gson gson = new Gson();
 
@@ -234,13 +214,13 @@ public class App {
       }
     });
 
-    put("/items", (request, response) -> {
+    put("/machine/DBItem", (request, response) -> {
       // Update something
       EntityManager session = sf.createEntityManager();
       try{
         Gson gson = new Gson();
 
-        String query = String.format("FROM Item WHERE name = '%s'", request.queryParams("name"));
+        String query = String.format("FROM DBItem WHERE name = '%s'", request.queryParams("name"));
         DBItem item = (DBItem) session.createQuery(query).getSingleResult();
         item.setQuantity(Integer.parseInt(request.queryParams("quantity")));
         session.getTransaction().begin();
@@ -256,28 +236,6 @@ public class App {
       }
     });
 
-    delete("/items", (request, response) -> {
-      // Annihilate something
-      // Create something
-      Gson gson = new Gson();
-      // Order order = (Order) gson.fromJson(request.body(), Order.class);
-      // Bucket result = vm.vend(order);
-      // return gson.toJson(result);
-      EntityManager session = sf.createEntityManager();
-      try {
-        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-        session.getTransaction().begin();
-        session.createQuery("DELETE FROM Item").executeUpdate();
-        session.getTransaction().commit();
-        return "OK";
-      } catch (Exception e) {
-        return "Error: " + e.getMessage();
-      } finally {
-        if (session.isOpen()) {
-          session.close();
-        }
-      }
-    });
 
     options("/options", (request, response) -> {
       // Appease something
