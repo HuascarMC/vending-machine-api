@@ -56,11 +56,12 @@ public class TestDrinkVendingMachine {
 
     State state = new State(true, true, true);
 
-    Bucket expectedResult = new Bucket<>(Drink.COKE, change, state);
+    Bucket expectedResult = new Bucket<>(Drink.COKE, change, state, 0.35);
 
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFourth(), expectedResult.getFourth() ));
   }
 
   @Test
@@ -71,11 +72,12 @@ public class TestDrinkVendingMachine {
 
     State state = new State(true, true, true);
 
-    Bucket expectedResult = new Bucket<>(Drink.PEPSI, change, state);
+    Bucket expectedResult = new Bucket<>(Drink.PEPSI, change, state, 0.00);
 
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFourth(), expectedResult.getFourth() ));
   }
 
   @Test
@@ -94,11 +96,12 @@ public class TestDrinkVendingMachine {
 
     State state = new State(false, true, true);
 
-    Bucket expectedResult = new Bucket<>(null, change, state);
+    Bucket expectedResult = new Bucket<>(null, change, state, 2.00);
 
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFourth(), expectedResult.getFourth() ));
   }
 
   @Test
@@ -109,11 +112,12 @@ public class TestDrinkVendingMachine {
 
     State state = new State(true, true, false);
 
-    Bucket expectedResult = new Bucket<>(null, change, state);
+    Bucket expectedResult = new Bucket<>(null, change, state, 0.00);
 
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFourth(), expectedResult.getFourth() ));
   }
 
   @Test
@@ -128,10 +132,11 @@ public class TestDrinkVendingMachine {
 
     State state = new State(true, false, true);
 
-    Bucket expectedResult = new Bucket<>(null, change, state);
+    Bucket expectedResult = new Bucket<>(null, change, state, 2.00);
 
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFirst(), expectedResult.getFirst() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getSecond(), expectedResult.getSecond() ));
     Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getThird(), expectedResult.getThird() ));
+    Assert.assertTrue(EqualsBuilder.reflectionEquals( result.getFourth(), expectedResult.getFourth() ));
   }
 }

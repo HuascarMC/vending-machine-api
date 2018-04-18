@@ -35,7 +35,7 @@ public class DrinkVendingMachine extends VendingMachine {
 
 
   @Override
-  public Bucket<Enum, List<Coin>, State> vend(Order order) {
+  public Bucket<Enum, List<Coin>, State, Double> vend(Order order) {
     Drink drink = (Drink) Drink.getDrinkByName((String) order.getItem());
     double balance =  order.getBalance();
 
@@ -47,9 +47,9 @@ public class DrinkVendingMachine extends VendingMachine {
       stockInventory.remove(drink);
       List<Coin> change = ChangeHandler.convertToChange(remainingBalance);
       coinInventory.update(change);
-      return new Bucket<>(drink, change, state);
+      return new Bucket<>(drink, change, state, ChangeHandler.getChangeValue(change));
     }
     List<Coin> refund = ChangeHandler.convertToChange(balance);
-    return new Bucket<>(null, refund, state);
+    return new Bucket<>(null, refund, state, ChangeHandler.getChangeValue(refund));
   }
 }

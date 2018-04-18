@@ -10,8 +10,8 @@ import java.math.RoundingMode;
 
 public class ChangeHandler {
 
-    public static float getChangeValue(List<Coin> change) {
-        float totalValue = 0;
+    public static Double getChangeValue(List<Coin> change) {
+        Double totalValue = 0.00;
         for(Coin coin : change) {
             totalValue += coin.getValue();
         }
