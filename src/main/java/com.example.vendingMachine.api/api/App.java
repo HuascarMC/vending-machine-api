@@ -79,6 +79,7 @@ corsFilter.apply();
 
           EntityManager session = sf.createEntityManager();
           try {
+            System.out.print("hi");
             Order order = (Order) gson.fromJson(request.body(), Order.class);
             Bucket result = vm.vend(order);
             return gson.toJson(result);

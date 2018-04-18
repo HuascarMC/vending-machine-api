@@ -32,4 +32,10 @@ public class TestBucket {
     assertFalse( (boolean) bucket.getThird() );
   }
 
+  @Test
+  public void testBucketHasFourth() {
+    Bucket bucket = new Bucket(true, true, true, false);
+    assertFalse( (boolean) bucket.getFourth() );
+  }
+
 }
