@@ -4,7 +4,7 @@
 ```
 git clone https://github.com/HuascarMC/vending-machine-server
 ```
-- Go inside your prime-multiplication-table-react directory.
+- Go inside your vending-machine-server directory.
 ```
 cd vending-machine-server
 ```
