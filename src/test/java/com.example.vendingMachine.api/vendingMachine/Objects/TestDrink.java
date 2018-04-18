@@ -48,4 +48,24 @@ public class TestDrink {
       assertEquals( 2.00, Drink.WATER.getPrice() );
     }
 
+    @Test
+    public void testGetCOKEByName() {
+      assertEquals( Drink.COKE, Drink.getDrinkByName("coke") );
+    }
+
+    @Test
+    public void testGetPEPSIByName() {
+      assertEquals( Drink.PEPSI, Drink.getDrinkByName("pepsi") );
+    }
+
+    @Test
+    public void testGetSODAByName() {
+      assertEquals( Drink.SODA, Drink.getDrinkByName("soda") );
+    }
+
+    @Test
+    public void testGetWATERByName() {
+      assertEquals( Drink.WATER, Drink.getDrinkByName("water") );
+    }
+
 }

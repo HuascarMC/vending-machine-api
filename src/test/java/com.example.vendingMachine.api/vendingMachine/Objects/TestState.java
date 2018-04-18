@@ -32,13 +32,13 @@ public class TestState {
 
     @Test(expected = NotEnoughChangeException.class)
     public void testCoinInventoryStateNotOk() {
-        State state = new State(false, true, true);
+        State state = new State(true, false, true);
         assertEquals(state.getCoinInventoryState(), new NotEnoughChangeException());
     }
 
     @Test(expected = OutOfStockException.class)
     public void testStockInventoryStateNotOk() {
-        State state = new State(true, false, true);
+        State state = new State(false, true, true);
         assertEquals(state.getStockInventoryState(), new OutOfStockException());
     }
 

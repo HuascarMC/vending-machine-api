@@ -10,8 +10,8 @@ import java.math.RoundingMode;
 
 public class ChangeHandler {
 
-    public static float getChangeValue(List<Coin> change) {
-        float totalValue = 0;
+    public static Double getChangeValue(List<Coin> change) {
+        Double totalValue = 0.00;
         for(Coin coin : change) {
             totalValue += coin.getValue();
         }
@@ -49,5 +49,12 @@ public class ChangeHandler {
 
       }
       return changes;
+  }
+
+  public static double subtractPrice(double balance, double price) {
+    double result = balance - price;
+    BigDecimal resultDecimal = new BigDecimal(result).setScale(2, RoundingMode.HALF_UP);
+    double preciseResult = resultDecimal.doubleValue();
+    return preciseResult;
   }
 }

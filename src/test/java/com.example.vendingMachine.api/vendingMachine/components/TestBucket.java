@@ -16,20 +16,26 @@ public class TestBucket {
 
   @Test
   public void testBucketHasFirst() {
-    Bucket bucket = new Bucket(false, true, true);
+    Bucket bucket = new Bucket(false, true, true, true);
     assertFalse( (boolean) bucket.getFirst() );
   }
 
   @Test
   public void testBucketHasSecond() {
-    Bucket bucket = new Bucket(true, false, true);
+    Bucket bucket = new Bucket(true, false, true, true);
     assertFalse( (boolean) bucket.getSecond() );
   }
 
   @Test
   public void testBucketHasThird() {
-    Bucket bucket = new Bucket(true, true, false);
+    Bucket bucket = new Bucket(true, true, false, true);
     assertFalse( (boolean) bucket.getThird() );
+  }
+
+  @Test
+  public void testBucketHasFourth() {
+    Bucket bucket = new Bucket(true, true, true, false);
+    assertFalse( (boolean) bucket.getFourth() );
   }
 
 }
