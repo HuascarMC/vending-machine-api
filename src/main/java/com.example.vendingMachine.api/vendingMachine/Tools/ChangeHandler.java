@@ -34,15 +34,18 @@ public class ChangeHandler {
                 changes.add( Coin.QUARTER );
                 amountDecimal = amountDecimal.subtract(new BigDecimal(Coin.QUARTER.getValue()));
 
-              } else if( (amountDecimal.compareTo(new BigDecimal(Coin.DIME.getValue())) == 1) || (amountDecimal.compareTo(new BigDecimal(Coin.DIME.getValue()).setScale(1, RoundingMode.HALF_UP)) ==  0 )) {
+              } else if( (amountDecimal.compareTo(new BigDecimal(Coin.DIME.getValue())) == 1) || (amountDecimal.compareTo(new BigDecimal(Coin.DIME.getValue()).setScale(2, RoundingMode.HALF_DOWN)) ==  0 )) {
                   changes.add( Coin.DIME );
                   amountDecimal = amountDecimal.subtract(new BigDecimal(Coin.DIME.getValue()));
 
               } else if( (amountDecimal.compareTo(new BigDecimal(Coin.NICKEL.getValue())) == 1) || (amountDecimal.compareTo(new BigDecimal(Coin.NICKEL.getValue()).setScale(2, RoundingMode.HALF_UP)) ==  0 )){
                   changes.add( Coin.NICKEL );
                   amountDecimal = amountDecimal.subtract(new BigDecimal(Coin.NICKEL.getValue()).setScale(2, RoundingMode.HALF_UP) );
-              } else {
+              } else if( (amountDecimal.compareTo(new BigDecimal(Coin.PENNY.getValue())) == 1) || (amountDecimal.compareTo(new BigDecimal(Coin.PENNY.getValue()).setScale(2, RoundingMode.HALF_UP)) ==  0 )) {
                 // Dunno why without this exception the method gets stuck or returns the wrong change.
+                changes.add( Coin.PENNY );
+                amountDecimal = amountDecimal.subtract(new BigDecimal(Coin.PENNY.getValue()).setScale(2, RoundingMode.HALF_UP) );
+              } else {
                 throw new NotEnoughChangeException();
               }
           }
