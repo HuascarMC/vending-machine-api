@@ -13,39 +13,39 @@ import javax.persistence.FetchType;
 @Table(name="DBItem")
 public class DBItem {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    int id;
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  int id;
 
-    @Column(name = "name")
-    String name;
+  @Column(name = "name")
+  String name;
 
-    @Column(name = "quantity")
-    Integer quantity;
+  @Column(name = "quantity")
+  Integer quantity;
 
-    public int getId() {
-        return id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public Integer getQuantity() {
-      return this.quantity;
-    }
+  public Integer getQuantity() {
+    return this.quantity;
+  }
 
-    public void setQuantity(Integer quantity) {
-      this.quantity = quantity;
-    }
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
 
 }

@@ -31,67 +31,67 @@ public class App {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
     vm.initialize();
-CorsFilter corsFilter = new CorsFilter();
-corsFilter.apply();
-        get("/cointemp", (request, response) -> {
-          // Show something
-          Gson gson = new Gson();
-          // Map stock = vm.stockInventory.getInventory();
-          // return gson.toJson(stock);
-              EntityManager session = sf.createEntityManager();
-          try {
-            Map<Coin, Integer> coins = vm.coinInventory.getInventory();
-            return gson.toJson(coins);
-          } catch (Exception e) {
-            return "Error: " + e.getMessage();
-          } finally {
-            if (session.isOpen()) {
-              session.close();
-            }
-          }
+    CorsFilter corsFilter = new CorsFilter();
+    corsFilter.apply();
+    get("/cointemp", (request, response) -> {
+      // Show something
+      Gson gson = new Gson();
+      // Map stock = vm.stockInventory.getInventory();
+      // return gson.toJson(stock);
+      EntityManager session = sf.createEntityManager();
+      try {
+        Map<Coin, Integer> coins = vm.coinInventory.getInventory();
+        return gson.toJson(coins);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+      }
 
-        });
+    });
 
-        get("/itemtemp", (request, response) -> {
-          // Show something
-          Gson gson = new Gson();
-          // Map stock = vm.stockInventory.getInventory();
-          // return gson.toJson(stock);
-              EntityManager session = sf.createEntityManager();
-          try {
-            Map<Drink, Integer> items = vm.stockInventory.getInventory();
-            return gson.toJson(items);
-          } catch (Exception e) {
-            return "Error: " + e.getMessage();
-          } finally {
-            if (session.isOpen()) {
-              session.close();
-            }
-          }
+    get("/itemtemp", (request, response) -> {
+      // Show something
+      Gson gson = new Gson();
+      // Map stock = vm.stockInventory.getInventory();
+      // return gson.toJson(stock);
+      EntityManager session = sf.createEntityManager();
+      try {
+        Map<Drink, Integer> items = vm.stockInventory.getInventory();
+        return gson.toJson(items);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+      }
 
-        });
+    });
 
 
 
-        post("/order", (request, response) -> {
-          // Create something
-          Gson gson = new Gson();
+    post("/order", (request, response) -> {
+      // Create something
+      Gson gson = new Gson();
 
-          EntityManager session = sf.createEntityManager();
-          try {
-            System.out.print("hi");
-            Order order = (Order) gson.fromJson(request.body(), Order.class);
-            Bucket result = vm.vend(order);
-            return gson.toJson(result);
-          } catch (Exception e) {
-            return "Error: " + e.getMessage();
-          } finally {
-            if (session.isOpen()) {
-              session.close();
-            }
+      EntityManager session = sf.createEntityManager();
+      try {
+        System.out.print("hi");
+        Order order = (Order) gson.fromJson(request.body(), Order.class);
+        Bucket result = vm.vend(order);
+        return gson.toJson(result);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
 
-          }
-        });
+      }
+    });
 
 
     get("/coins", (request, response) -> {
