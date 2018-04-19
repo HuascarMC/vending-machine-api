@@ -54,7 +54,7 @@ public class App {
     });
 
     put("/machine/addcoin/:coin", (request, response) -> {
-      // Create coin
+      // Add one coin :coin
       Gson gson = new Gson();
       String coinName = (String) request.params(":coin") ;
       DBHelper dbhelper = new DBHelper();
@@ -62,6 +62,14 @@ public class App {
       return gson.toJson("OK");
     });
 
+    put("/machine/additem/:item", (request, response) -> {
+      // Add one item :coin
+      Gson gson = new Gson();
+      String itemName = (String) request.params(":item");
+      DBHelper dbhelper = new DBHelper();
+      dbhelper.addOneItem(itemName);
+      return gson.toJson("OK");
+    });
 
     // });
 
