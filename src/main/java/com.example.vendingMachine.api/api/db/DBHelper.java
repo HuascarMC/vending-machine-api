@@ -28,7 +28,7 @@ public class DBHelper {
     double result = 0.00;
     EntityManager session = sf.createEntityManager();
     List<DBCoin> coins = session.createQuery("FROM DBCoin").getResultList();
-    for(Coin coin : coins) {
+    for(DBCoin coin : coins) {
       result += coin.getValue();
     }
     return result;
