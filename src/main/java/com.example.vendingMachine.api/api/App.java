@@ -4,107 +4,48 @@ import static spark.Spark.*;
 
 import com.google.gson.Gson;
 
-
-import com.example.vendingMachine.api.VendingMachineImpl;
-
 import vendingMachine.DrinkVendingMachine;
+
 import vendingMachine.Objects.Order;
 import vendingMachine.Objects.Drink;
 import vendingMachine.Objects.Coin;
+
 import vendingMachine.components.Bucket;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import javax.servlet.MultipartConfigElement;
-import javax.persistence.Query;
-import javax.persistence.EntityManager;
 
 import java.util.Map;
 
 import api.Tools.CorsFilter;
-import api.db.DBHelper;
 
 import api.models.DBItem;
 import api.models.DBCoin;
 
-// import org.hibernate.SessionFactory;
-// import org.hibernate.cfg.Configuration;
-//
-// import javax.persistence.EntityManager;
-// import javax.servlet.MultipartConfigElement;
-// import javax.persistence.Query;
-
-
 import java.util.List;
 
 public class App {
-
   public static void main(String[] args) {
-
-    SessionFactory sf = new Configuration().configure().buildSessionFactory();
-    // DrinkVendingMachine vm = new DrinkVendingMachine();
-    // vm.initialize();
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
 
+    post("/order", (request, response) -> {
+      // Create something
+      Gson gson = new Gson();
 
-        post("/order", (request, response) -> {
-          // Create something
-          Gson gson = new Gson();
-          DBHelper dbhelper = new DBHelper();
-          boolean result = dbhelper.hasItem("COKE");
-            return gson.toJson(result);
+      EntityManager session = sf.createEntityManager();
 
-          });
-
-            // Update coin
-            get("/machine/DBItem", (request, response) -> {
-              EntityManager session = sf.createEntityManager();
-              try{
-                Gson gson = new Gson();
-                List<Coin> coins = session.createQuery("FROM DBCoin").getResultList();
-                // coin.setQuantity(Integer.parseInt(request.queryParams("quantity")));
-                // session.getTransaction().begin();
-                // session.merge(coin);
-                // session.getTransaction().commit();
-                double result = 0.00;
-                for(Coin coin : coins) {
-                  result += coin.getValue();
-                }
-                return gson.toJson(result);
-              } catch(Exception e) {
-                return "Error: " + e.getMessage();
-              } finally {
-                if(session.isOpen()) {
-                  session.close();
-                }
-              }
-            });
+      try {
+        Order order = (Order) gson.fromJson(request.body(), Order.class);
+        Bucket result = vm.vend(order);
+        return gson.toJson(result);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
         }
+
       }
-
-
-    // post("/order", (request, response) -> {
-    //   // Create something
-    //   Gson gson = new Gson();
-    //
-    //   EntityManager session = sf.createEntityManager();
-    //
-    //   try {
-    //     Order order = (Order) gson.fromJson(request.body(), Order.class);
-    //     Bucket result = vm.vend(order);
-    //     return gson.toJson(result);
-    //   } catch (Exception e) {
-    //     return "Error: " + e.getMessage();
-    //   } finally {
-    //     if (session.isOpen()) {
-    //       session.close();
-    //     }
-    //
-    //   }
-    // });
-
+    });
+}
   //   get("/cointemp", (request, response) -> {
   //     // Show something
   //     Gson gson = new Gson();
@@ -144,27 +85,27 @@ public class App {
   //
   //
   //
-//     get("/machine/:inventory", (request, response) -> {
-//       // Get all from chosen inventory
-//       Gson gson = new Gson();
-//       EntityManager session = sf.createEntityManager();
-//
-//       try {
-//         List<Coin> items = session.createQuery("FROM " + request.params(":inventory")).getResultList();
-//         return gson.toJson(items);
-//
-//       } catch (Exception e) {
-//
-//         return "Error: " + e.getMessage();
-//       } finally {
-//
-//         if (session.isOpen()) {
-//           session.close();
-//         }
-//       }
-//
-//     });
-//
+  //   get("/machine/:inventory", (request, response) -> {
+  //     // Get all from chosen inventory
+  //     Gson gson = new Gson();
+  //     EntityManager session = sf.createEntityManager();
+  //
+  //     try {
+  //       List<Coin> items = session.createQuery("FROM " + request.params(":inventory")).getResultList();
+  //       return gson.toJson(items);
+  //
+  //     } catch (Exception e) {
+  //
+  //       return "Error: " + e.getMessage();
+  //     } finally {
+  //
+  //       if (session.isOpen()) {
+  //         session.close();
+  //       }
+  //     }
+  //
+  //   });
+  //
   //   post("/machine/DBCoin", (request, response) -> {
   //     // Create coin
   //     Gson gson = new Gson();
@@ -279,4 +220,4 @@ public class App {
   //     return "options";
   //   });
   // }
-// }
+}

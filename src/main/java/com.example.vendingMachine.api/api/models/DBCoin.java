@@ -24,7 +24,7 @@ public class DBCoin {
   @Column(name = "quantity")
   Integer quantity;
 
-  @Column(value = "value")
+  @Column(name = "value")
   double value;
 
   public int getId() {
