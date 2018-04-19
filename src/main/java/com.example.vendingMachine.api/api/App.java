@@ -40,15 +40,6 @@ public class App {
       return gson.toJson(result);
     });
 
-    put("/machine/addcoin/:coin", (request, response) -> {
-      // Create coin
-      Gson gson = new Gson();
-      String coinName = (String) request.params(":coin") ;
-      DBHelper dbhelper = new DBHelper();
-      dbhelper.addOneCoin(coinName);
-      return gson.toJson("added");
-    });
-
     get("/machine/:inventory", (request, response) -> {
       // Get all from chosen inventory
       Gson gson = new Gson();
@@ -61,6 +52,16 @@ public class App {
       }
       return gson.toJson("no inventory called " + inventory);
     });
+
+    put("/machine/addcoin/:coin", (request, response) -> {
+      // Create coin
+      Gson gson = new Gson();
+      String coinName = (String) request.params(":coin") ;
+      DBHelper dbhelper = new DBHelper();
+      dbhelper.addOneCoin(coinName);
+      return gson.toJson("OK");
+    });
+
 
     // });
 
