@@ -40,32 +40,20 @@ public class App {
       return gson.toJson(result);
     });
 
-    post("/machine/addCoin", (request, response) -> {
+    put("/machine/addcoin/:coin", (request, response) -> {
       // Create coin
       Gson gson = new Gson();
-      String coinName = (String) gson.fromJson(request.body(), String.class);
+      String coinName = (String) request.params(":coin") ;
       DBHelper dbhelper = new DBHelper();
       dbhelper.addOneCoin(coinName);
-      response.redirect("/machine/coins")
+      return gson.toJson("added");
     });
-    // get("/machine/:inventory", (request, response) -> {
-    //   // Get all from chosen inventory
-    //   Gson gson = new Gson();
-    //   EntityManager session = sf.createEntityManager();
-    //
-    //   try {
-    //     List<Coin> items = session.createQuery("FROM " + request.params(":inventory")).getResultList();
-    //     return gson.toJson(items);
-    //
-    //   } catch (Exception e) {
-    //
-    //     return "Error: " + e.getMessage();
-    //   } finally {
-    //
-    //     if (session.isOpen()) {
-    //       session.close();
-    //     }
-    //   }
+
+    get("/machine/:inventory", (request, response) -> {
+      // Get all from chosen inventory
+      Gson gson = new Gson();
+      return gson.toJson(request.params(":inventory"));
+    });
 
     // });
 
@@ -160,5 +148,5 @@ public class App {
   //     // Appease something
   //     return "options";
   //   });
-  // }
+  }
 }
