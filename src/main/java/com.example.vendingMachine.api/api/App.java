@@ -32,7 +32,7 @@ public class App {
       // Create something
       Gson gson = new Gson();
       DBHelper dbhelper = new DBHelper();
-      return gson.toJson(dbhelper.getCoinTotal());
+      return gson.toJson(dbhelper.hasItem("COKE"));
     });
     }
 
