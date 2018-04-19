@@ -16,6 +16,8 @@ import vendingMachine.components.Bucket;
 
 import java.util.Map;
 
+import com.example.vendingMachine.api.VendingMachineImpl;
+
 import api.Tools.CorsFilter;
 
 import api.models.DBItem;
@@ -25,14 +27,17 @@ import java.util.List;
 
 public class App {
   public static void main(String[] args) {
+
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
+    VendingMachineImpl vm = new VendingMachineImpl();
 
     post("/order", (request, response) -> {
       // Create something
       Gson gson = new Gson();
-      DBHelper dbhelper = new DBHelper();
-      return gson.toJson(dbhelper.hasItem("COKE"));
+      Order order = (Order) gson.fromJson(request.body(), Order.class);
+      Bucket result = (Bucket) vm.vend(order);
+      return gson.toJson(result);
     });
     }
 
