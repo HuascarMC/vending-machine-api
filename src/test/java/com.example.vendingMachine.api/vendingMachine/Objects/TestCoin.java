@@ -29,23 +29,28 @@ public class TestCoin {
   }
 
   @Test
+  public void testPennyName() {
+    assertEquals( "PENNY", Coin.NICKEL.getName());
+  }
+
+  @Test
   public void testNickelName() {
-    assertEquals( 0.05, Coin.NICKEL.getValue());
+    assertEquals( "NICKEL", Coin.NICKEL.getName());
   }
 
   @Test
   public void testDimeName() {
-    assertEquals( 0.10, Coin.DIME.getValue());
+    assertEquals( "DIME", Coin.DIME.getName());
   }
 
   @Test
   public void testQuarterName() {
-    assertEquals(0.25, Coin.QUARTER.getValue());
+    assertEquals( "QUARTER", Coin.QUARTER.getName());
   }
 
   @Test
   public void testDollarName() {
-    assertEquals(1.00, Coin.DOLLAR.getValue());
+    assertEquals( "DOLLAR", Coin.DOLLAR.getName());
   }
 
 }
