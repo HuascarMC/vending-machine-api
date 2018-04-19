@@ -24,6 +24,9 @@ public class DBCoin {
   @Column(name = "quantity")
   Integer quantity;
 
+  @Column(value = "value")
+  double value;
+
   public int getId() {
     return id;
   }
@@ -41,11 +44,19 @@ public class DBCoin {
   }
 
   public Integer getQuantity() {
-    return this.quantity;
+    return quantity;
   }
 
   public void setQuantity(Integer quantity) {
     this.quantity = quantity;
+  }
+
+  public double getValue() {
+    return value;
+  }
+
+  public void setValue() {
+    this.value = value;
   }
 
 }
