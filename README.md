@@ -18,6 +18,9 @@ A client-side has been developed to simulate visually the operation of this API,
 
 ## How to run
 
+*NOTE*
+- It connects to a database named 'test' running (MySql).
+
 - Clone this repo into your local machine.
 ```
 git clone https://github.com/HuascarMC/vending-machine-server
@@ -62,4 +65,4 @@ http://localhost:4567/items
 
 - Double coin, item objects unnecessary (DB, machine object).
 
-- **A LOT MORE** 
+- **A LOT MORE**
