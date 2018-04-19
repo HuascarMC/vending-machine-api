@@ -54,8 +54,12 @@ public class App {
       Gson gson = new Gson();
       DBHelper dbhelper = new DBHelper();
       String inventory = request.params(":inventory");
-      dbhelper.getInventory(inventory)
-      return gson.toJson(inventory);
+      if(inventory.equals("coins")) {
+        return gson.toJson(dbhelper.getCoins());
+      } else if (inventory.equals("items")) {
+        return gson.toJson(dbhelper.getItems());
+      }
+      return gson.toJson("no inventory called " + inventory);
     });
 
     // });

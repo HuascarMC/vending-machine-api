@@ -102,7 +102,9 @@ public class DBHelper {
 
   public List<DBCoin> getCoins() {
     EntityManager session = sf.createEntityManager();
+    System.out.println("something");
     List<DBCoin> coins = session.createQuery("FROM DBCoin").getResultList();
+    System.out.println("something2");
     return coins;
   }
 
@@ -111,4 +113,5 @@ public class DBHelper {
     List<DBItem> items = session.createQuery("FROM DBItem").getResultList();
     return items;
   }
+
 }
