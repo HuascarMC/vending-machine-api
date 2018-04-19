@@ -55,6 +55,19 @@ public class DBHelper {
     }
   }
 
+  public void addOneItem(String itemName) {
+    String query = String.format("FROM DBItem WHERE name = '%s'", itemName);
+    EntityManager session = sf.createEntityManager();
+    DBItem item = (DBItem) session.createQuery(query).getSingleResult();
+    Integer currentQuantity = item.getQuantity();
+    if(currentQuantity > 0) {
+      item.setQuantity(currentQuantity + 1);
+      session.getTransaction().begin();
+      session.merge(item);
+      session.getTransaction().commit();
+    }
+  }
+
   public void removeOneCoin(String coinName) {
     String query = String.format("FROM DBCoin WHERE name = '%s'", coinName);
     EntityManager session = sf.createEntityManager();

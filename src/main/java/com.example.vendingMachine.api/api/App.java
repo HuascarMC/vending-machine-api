@@ -39,67 +39,27 @@ public class App {
       Bucket result = (Bucket) vm.vend(order);
       return gson.toJson(result);
     });
-    }
 
-  //   get("/cointemp", (request, response) -> {
-  //     // Show something
-  //     Gson gson = new Gson();
-  //     //Temporal route coins that work in memory.
-  //     EntityManager session = sf.createEntityManager();
-  //     try {
-  //       Map<Coin, Integer> coins = vm.coinInventory.getInventory();
-  //       return gson.toJson(coins);
-  //     } catch (Exception e) {
-  //       return "Error: " + e.getMessage();
-  //     } finally {
-  //       if (session.isOpen()) {
-  //         session.close();
-  //       }
-  //     }
-  //
-  //   });
-  //
-  //   get("/itemtemp", (request, response) -> {
-  //     // Temporal route for items that work in memory.
-  //     Gson gson = new Gson();
-  //
-  //     EntityManager session = sf.createEntityManager();
-  //     try {
-  //       Map<Drink, Integer> items = vm.stockInventory.getInventory();
-  //       return gson.toJson(items);
-  //     } catch (Exception e) {
-  //       return "Error: " + e.getMessage();
-  //     } finally {
-  //       if (session.isOpen()) {
-  //         session.close();
-  //       }
-  //     }
-  //
-  //   });
-  //
-  //
-  //
-  //
-  //   get("/machine/:inventory", (request, response) -> {
-  //     // Get all from chosen inventory
-  //     Gson gson = new Gson();
-  //     EntityManager session = sf.createEntityManager();
-  //
-  //     try {
-  //       List<Coin> items = session.createQuery("FROM " + request.params(":inventory")).getResultList();
-  //       return gson.toJson(items);
-  //
-  //     } catch (Exception e) {
-  //
-  //       return "Error: " + e.getMessage();
-  //     } finally {
-  //
-  //       if (session.isOpen()) {
-  //         session.close();
-  //       }
-  //     }
-  //
-  //   });
+    // get("/machine/:inventory", (request, response) -> {
+    //   // Get all from chosen inventory
+    //   Gson gson = new Gson();
+    //   EntityManager session = sf.createEntityManager();
+    //
+    //   try {
+    //     List<Coin> items = session.createQuery("FROM " + request.params(":inventory")).getResultList();
+    //     return gson.toJson(items);
+    //
+    //   } catch (Exception e) {
+    //
+    //     return "Error: " + e.getMessage();
+    //   } finally {
+    //
+    //     if (session.isOpen()) {
+    //       session.close();
+    //     }
+    //   }
+
+    // });
   //
   //   post("/machine/DBCoin", (request, response) -> {
   //     // Create coin
