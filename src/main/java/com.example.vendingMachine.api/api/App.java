@@ -27,7 +27,9 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class App {
+
   public static void main(String[] args) {
+    
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     DrinkVendingMachine vm = new DrinkVendingMachine();
     vm.initialize();

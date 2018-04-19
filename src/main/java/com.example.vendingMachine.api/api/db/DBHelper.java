@@ -1,10 +1,15 @@
-package api.models;
+package api.db;
 
 import javax.persistence.EntityManager;
-import org.hibernate.SessionFactory;
+
 import vendingMachine.Objects.Coin;
+
+import api.models.DBCoin;
+import api.models.DBItem;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 import java.util.List;
 
 public class DBHelper {
@@ -61,5 +66,4 @@ public class DBHelper {
       removeOneCoin(coin.getName());
     }
   }
-
 }
