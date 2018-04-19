@@ -30,7 +30,7 @@ public class TestCoin {
 
   @Test
   public void testPennyName() {
-    assertEquals( "PENNY", Coin.NICKEL.getName());
+    assertEquals( "PENNY", Coin.PENNY.getName());
   }
 
   @Test
