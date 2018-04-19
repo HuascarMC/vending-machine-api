@@ -10,21 +10,24 @@ import api.models.DBItem;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.servlet.MultipartConfigElement;
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
+
 import java.util.List;
 
 public class DBHelper {
 
   private SessionFactory sf;
-  private EntityManager session;
 
   public void DBHelper() {
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
-    EntityManager session = sf.createEntityManager();
   }
 
   public double getCoinTotal() {
     double result = 0.00;
-    List<Coin> coins = session.createQuery("FROM DBCoin").getResultList();
+    EntityManager session = sf.createEntityManager();
+    List<DBCoin> coins = session.createQuery("FROM DBCoin").getResultList();
     for(Coin coin : coins) {
       result += coin.getValue();
     }
@@ -33,12 +36,17 @@ public class DBHelper {
 
   public boolean hasItem(String itemName) {
     String query = String.format("FROM DBItem WHERE name = '%s'", itemName);
+    System.out.println(query);
+    EntityManager session = sf.createEntityManager();
+    System.out.println(query);
     DBItem item = (DBItem) session.createQuery(query).getSingleResult();
+    System.out.println(item);
     return (item.getQuantity() > 0);
   }
 
   public void removeOneItem(String itemName) {
     String query = String.format("FROM DBItem WHERE name = '%s'", itemName);
+    EntityManager session = sf.createEntityManager();
     DBItem item = (DBItem) session.createQuery(query).getSingleResult();
     Integer currentQuantity = item.getQuantity();
     if(currentQuantity > 0) {
@@ -51,6 +59,7 @@ public class DBHelper {
 
   public void removeOneCoin(String coinName) {
     String query = String.format("FROM DBCoin WHERE name = '%s'", coinName);
+    EntityManager session = sf.createEntityManager();
     DBCoin coin = (DBCoin) session.createQuery(query).getSingleResult();
     Integer currentQuantity = coin.getQuantity();
     if(currentQuantity > 0) {
