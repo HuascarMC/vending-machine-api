@@ -71,6 +71,22 @@ public class App {
       return gson.toJson("OK");
     });
 
+    put("/machine/removecoin/:coin", (request, response) -> {
+      Gson gson = new Gson();
+      String coinName = (String) request.params(":coin") ;
+      DBHelper dbhelper = new DBHelper();
+      dbhelper.removeOneCoin(coinName);
+      return gson.toJson("OK");
+    });
+
+    put("/machine/removeitem/:item", (request, response) -> {
+      Gson gson = new Gson();
+      String itemName = (String) request.params(":item") ;
+      DBHelper dbhelper = new DBHelper();
+      dbhelper.removeOneItem(itemName);
+      return gson.toJson("OK");
+    });
+
     // });
 
   //   // Update coin
