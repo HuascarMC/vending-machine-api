@@ -18,15 +18,13 @@ import java.util.List;
 
 public class DBHelper {
 
-  private SessionFactory sf;
-
-  public void DBHelper() {
-    SessionFactory sf = new Configuration().configure().buildSessionFactory();
-  }
+  private SessionFactory sf = new Configuration().configure().buildSessionFactory();;
 
   public double getCoinTotal() {
     double result = 0.00;
+    System.out.print("hi");
     EntityManager session = sf.createEntityManager();
+    System.out.print("hi");
     List<DBCoin> coins = session.createQuery("FROM DBCoin").getResultList();
     for(DBCoin coin : coins) {
       result += coin.getValue();

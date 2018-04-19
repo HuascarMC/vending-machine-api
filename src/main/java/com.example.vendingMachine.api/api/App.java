@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 
 import vendingMachine.DrinkVendingMachine;
 
+import api.db.DBHelper;
+
 import vendingMachine.Objects.Order;
 import vendingMachine.Objects.Drink;
 import vendingMachine.Objects.Coin;
@@ -29,23 +31,11 @@ public class App {
     post("/order", (request, response) -> {
       // Create something
       Gson gson = new Gson();
-
-      EntityManager session = sf.createEntityManager();
-
-      try {
-        Order order = (Order) gson.fromJson(request.body(), Order.class);
-        Bucket result = vm.vend(order);
-        return gson.toJson(result);
-      } catch (Exception e) {
-        return "Error: " + e.getMessage();
-      } finally {
-        if (session.isOpen()) {
-          session.close();
-        }
-
-      }
+      DBHelper dbhelper = new DBHelper();
+      return gson.toJson(dbhelper.getCoinTotal());
     });
-}
+    }
+
   //   get("/cointemp", (request, response) -> {
   //     // Show something
   //     Gson gson = new Gson();
