@@ -87,10 +87,26 @@ public class App {
       return gson.toJson("OK");
     });
 
-    options("/options", (request, response) -> {
-      // Appease something
-      Gson gson = new Gson();
-      return gson.toJson("options");
-    });
+    options("/*",
+        (request, response) -> {
+
+            String accessControlRequestHeaders = request
+                    .headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers",
+                        accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request
+                    .headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods",
+                        accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+// before((response) -> response.header("Access-Control-Allow-Origin"));
   }
 }
