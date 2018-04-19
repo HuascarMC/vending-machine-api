@@ -52,7 +52,10 @@ public class App {
     get("/machine/:inventory", (request, response) -> {
       // Get all from chosen inventory
       Gson gson = new Gson();
-      return gson.toJson(request.params(":inventory"));
+      DBHelper dbhelper = new DBHelper();
+      String inventory = request.params(":inventory");
+      dbhelper.getInventory(inventory)
+      return gson.toJson(inventory);
     });
 
     // });

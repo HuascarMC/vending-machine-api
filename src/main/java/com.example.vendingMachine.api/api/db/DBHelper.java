@@ -99,4 +99,10 @@ public class DBHelper {
       removeOneCoin(coin.getName());
     }
   }
+
+  public List<Coin> getCoins() {
+    EntityManager session = sf.createEntityManager();
+    List<Coin> coins = session.createQuery("FROM DBCoin").getResultList();
+    return coins;
+  }
 }
