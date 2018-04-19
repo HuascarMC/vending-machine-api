@@ -22,9 +22,9 @@ public class DBHelper {
     EntityManager session = sf.createEntityManager();
   }
 
-  public double getCoinTotal(String params) {
+  public double getCoinTotal() {
     double result = 0.00;
-    List<Coin> coins = session.createQuery("FROM " + params).getResultList();
+    List<Coin> coins = session.createQuery("FROM DBCoin").getResultList();
     for(Coin coin : coins) {
       result += coin.getValue();
     }

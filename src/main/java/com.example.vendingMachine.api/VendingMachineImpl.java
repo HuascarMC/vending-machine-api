@@ -19,6 +19,7 @@ public class VendingMachineImpl extends VendingMachine {
 
   public VendingMachineImpl() {
     super();
+    dbhelper = new DBHelper();
   }
 
   @Override
@@ -28,12 +29,12 @@ public class VendingMachineImpl extends VendingMachine {
 
     double remainingBalance = balance - drink.getPrice();
 
-    State state = new State(stockInventory.hasItem(drink), coinInventory.enoughChange(remainingBalance), remainingBalance >= 0 );
+    State state = new State(dbhelper.hasItem(drink.getName()), dbhelper.getCoinTotal() >= remainingBalance, remainingBalance >= 0 );
 
     if(state.possible()) {
-      stockInventory.remove(drink);
       List<Coin> change = ChangeHandler.convertToChange(remainingBalance);
-      coinInventory.update(change);
+      dbhelper.removeOneItem(drink.getName());
+      dbhelper.removeCoins(change);
       return new Bucket<>(drink, change, state, ChangeHandler.getChangeValue(change));
     }
     List<Coin> refund = ChangeHandler.convertToChange(balance);
