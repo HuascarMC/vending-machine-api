@@ -40,6 +40,14 @@ public class App {
       return gson.toJson(result);
     });
 
+    post("/machine/addCoin", (request, response) -> {
+      // Create coin
+      Gson gson = new Gson();
+      String coinName = (String) gson.fromJson(request.body(), String.class);
+      DBHelper dbhelper = new DBHelper();
+      dbhelper.addOneCoin(coinName);
+      response.redirect("/machine/coins")
+    });
     // get("/machine/:inventory", (request, response) -> {
     //   // Get all from chosen inventory
     //   Gson gson = new Gson();
@@ -60,29 +68,7 @@ public class App {
     //   }
 
     // });
-  //
-  //   post("/machine/DBCoin", (request, response) -> {
-  //     // Create coin
-  //     Gson gson = new Gson();
-  //     EntityManager session = sf.createEntityManager();
-  //     try {
-  //       request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
-  //       DBCoin coin = (DBCoin) gson.fromJson(request.body(), DBCoin.class);
-  //
-  //       session.getTransaction().begin();
-  //       session.persist(coin);
-  //       session.getTransaction().commit();
-  //
-  //       return gson.toJson(coin);
-  //     } catch (Exception e) {
-  //       return "Error: " + e.getMessage();
-  //     } finally {
-  //       if (session.isOpen()) {
-  //         session.close();
-  //       }
-  //
-  //     }
-  //   });
+
   //   // Update coin
   //   put("/machine/DBCoin", (request, response) -> {
   //     EntityManager session = sf.createEntityManager();
