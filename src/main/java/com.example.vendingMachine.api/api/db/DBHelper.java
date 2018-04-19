@@ -100,9 +100,15 @@ public class DBHelper {
     }
   }
 
-  public List<Coin> getCoins() {
+  public List<DBCoin> getCoins() {
     EntityManager session = sf.createEntityManager();
-    List<Coin> coins = session.createQuery("FROM DBCoin").getResultList();
+    List<DBCoin> coins = session.createQuery("FROM DBCoin").getResultList();
     return coins;
+  }
+
+  public List<DBItem> getItems() {
+    EntityManager session = sf.createEntityManager();
+    List<DBItem> items = session.createQuery("FROM DBItem").getResultList();
+    return items;
   }
 }
