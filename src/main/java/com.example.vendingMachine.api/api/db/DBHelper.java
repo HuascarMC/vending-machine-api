@@ -27,7 +27,7 @@ public class DBHelper {
   }
 
   public boolean hasItem(String itemName) {
-    String query = String.format("FROM DBCoin WHERE name = '%s'", itemName);
+    String query = String.format("FROM DBItem WHERE name = '%s'", itemName);
     DBItem item = (DBItem) session.createQuery(query).getSingleResult();
     return (item.getQuantity() > 0);
   }
@@ -36,10 +36,30 @@ public class DBHelper {
     String query = String.format("FROM DBItem WHERE name = '%s'", itemName);
     DBItem item = (DBItem) session.createQuery(query).getSingleResult();
     Integer currentQuantity = item.getQuantity();
-    item.setQuantity(currentQuantity - 1);
-    session.getTransaction().begin();
-    session.merge(item);
-    session.getTransaction().commit();
+    if(currentQuantity > 0) {
+      item.setQuantity(currentQuantity - 1);
+      session.getTransaction().begin();
+      session.merge(item);
+      session.getTransaction().commit();
+    }
+  }
+
+  public void removeOneCoin(String coinName) {
+    String query = String.format("FROM DBCoin WHERE name = '%s'", coinName);
+    DBCoin coin = (DBCoin) session.createQuery(query).getSingleResult();
+    Integer currentQuantity = coin.getQuantity();
+    if(currentQuantity > 0) {
+      coin.setQuantity(currentQuantity - 1);
+      session.getTransaction().begin();
+      session.merge(coin);
+      session.getTransaction().commit();
+    }
+  }
+
+  public void removeCoins(List<Coin> coins) {
+    for(Coin coin : coins) {
+      removeOneCoin(coin.getName());
+    }
   }
 
 }
