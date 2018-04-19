@@ -73,7 +73,6 @@ public class DBHelper {
     EntityManager session = sf.createEntityManager();
     DBCoin item = (DBCoin) session.createQuery(query).getSingleResult();
     Integer currentQuantity = item.getQuantity();
-    if(currentQuantity > 0) {
       item.setQuantity(currentQuantity + 1);
       session.getTransaction().begin();
       session.merge(item);
@@ -86,12 +85,10 @@ public class DBHelper {
     EntityManager session = sf.createEntityManager();
     DBCoin coin = (DBCoin) session.createQuery(query).getSingleResult();
     Integer currentQuantity = coin.getQuantity();
-    if(currentQuantity > 0) {
       coin.setQuantity(currentQuantity - 1);
       session.getTransaction().begin();
       session.merge(coin);
       session.getTransaction().commit();
-    }
   }
 
   public void removeCoins(List<Coin> coins) {
