@@ -39,6 +39,7 @@ public class App {
       Gson gson = new Gson();
 
       EntityManager session = sf.createEntityManager();
+
       try {
         Order order = (Order) gson.fromJson(request.body(), Order.class);
         Bucket result = vm.vend(order);
@@ -56,8 +57,7 @@ public class App {
     get("/cointemp", (request, response) -> {
       // Show something
       Gson gson = new Gson();
-      // Map stock = vm.stockInventory.getInventory();
-      // return gson.toJson(stock);
+      //Temporal route coins that work in memory.
       EntityManager session = sf.createEntityManager();
       try {
         Map<Coin, Integer> coins = vm.coinInventory.getInventory();
@@ -73,10 +73,9 @@ public class App {
     });
 
     get("/itemtemp", (request, response) -> {
-      // Show something
+      // Temporal route for items that work in memory.
       Gson gson = new Gson();
-      // Map stock = vm.stockInventory.getInventory();
-      // return gson.toJson(stock);
+
       EntityManager session = sf.createEntityManager();
       try {
         Map<Drink, Integer> items = vm.stockInventory.getInventory();
@@ -95,7 +94,7 @@ public class App {
 
 
     get("/machine/:inventory", (request, response) -> {
-
+      // Get all from chosen inventory
       Gson gson = new Gson();
       EntityManager session = sf.createEntityManager();
 
@@ -116,11 +115,8 @@ public class App {
     });
 
     post("/machine/DBCoin", (request, response) -> {
-      // Create something
+      // Create coin
       Gson gson = new Gson();
-      // Order order = (Order) gson.fromJson(request.body(), Order.class);
-      // Bucket result = vm.vend(order);
-      // return gson.toJson(result);
       EntityManager session = sf.createEntityManager();
       try {
         request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
@@ -140,9 +136,8 @@ public class App {
 
       }
     });
-
+    // Update coin
     put("/machine/DBCoin", (request, response) -> {
-      // Update something
       EntityManager session = sf.createEntityManager();
       try{
         Gson gson = new Gson();
@@ -163,13 +158,9 @@ public class App {
       }
     });
 
+    // Delete all items
     delete("/machine/:inventory", (request, response) -> {
-      // Annihilate something
-      // Create something
       Gson gson = new Gson();
-      // Order order = (Order) gson.fromJson(request.body(), Order.class);
-      // Bucket result = vm.vend(order);
-      // return gson.toJson(result);
       EntityManager session = sf.createEntityManager();
       try {
         request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
@@ -185,14 +176,9 @@ public class App {
         }
       }
     });
-
+    // Create item
     post("/machine/DBItem", (request, response) -> {
-      // Create something
       Gson gson = new Gson();
-
-      // Order order = (Order) gson.fromJson(request.body(), Order.class);
-      // Bucket result = vm.vend(order);
-      // return gson.toJson(result);
       EntityManager session = sf.createEntityManager();
       try {
         request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
@@ -215,7 +201,7 @@ public class App {
     });
 
     put("/machine/DBItem", (request, response) -> {
-      // Update something
+      // Update item
       EntityManager session = sf.createEntityManager();
       try{
         Gson gson = new Gson();
