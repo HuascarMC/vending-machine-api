@@ -13,8 +13,28 @@ The stack used for the project is the following:
 - Hibernate (Object-relational-mapping).
 - JAVA
 - MySQL (connects)
+- Gradle./
 
 A client-side has been developed to simulate visually the operation of this API, click ![here](https://github.com/HuascarMC/vending-machine-client).
+
+Order object:
+
+
+![alt text](images/order-object.png)
+
+
+Items inventory:
+
+
+![alt text](images/item-inventory.png)
+
+
+Coin inventory:
+
+
+![alt text](images/coin-inventory.png)
+
+
 
 ## How to run
 
@@ -45,8 +65,6 @@ with JSON body:
 JSON => {item: pepsi, balance: 1.50}
 http://localhost:4567/items
 ```
-
-![alt text](images/example.png)
 
 ## Functionality
 
