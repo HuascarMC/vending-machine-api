@@ -119,6 +119,29 @@ public class App {
       }
     });
 
+    post("/machine/create/item", (request, response) -> {
+      // Create coin
+      Gson gson = new Gson();
+      EntityManager session = sf.createEntityManager();
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+        DBItem item = (DBItem) gson.fromJson(request.body(), DBItem.class);
+
+        session.getTransaction().begin();
+        session.persist(item);
+        session.getTransaction().commit();
+
+        return gson.toJson(item);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+
+      }
+    });
+
     options("/*",
         (request, response) -> {
 
