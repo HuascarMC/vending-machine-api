@@ -1,8 +1,8 @@
 ## Description
 
 This is a simple RESTful API with a multiple set of routes to operate a vending machine.
-It's main function is to return a JSON object upon an order 'request' (item, balance) with a response
-'bucket' (item, change, transaction-state, receipt).
+It's main function is to return a JSON object as response when an order 'request' (item, balance) is made,
+the response object is a 'bucket' that contains transaction information (item, change, transaction-state, receipt).
 
 It also allows to manipulate inventory data (coins, items) through other routes. It can be used
 to integrate with client-side by making requests and render based on the response.
@@ -65,4 +65,4 @@ http://localhost:4567/items
 
 - Double coin, item objects unnecessary (DB, machine object).
 
-- **A LOT MORE**
+- **MORE**
