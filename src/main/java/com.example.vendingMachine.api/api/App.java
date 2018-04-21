@@ -23,11 +23,19 @@ import api.Tools.CorsFilter;
 import api.models.DBItem;
 import api.models.DBCoin;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import javax.servlet.MultipartConfigElement;
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
+
+
 import java.util.List;
 
 public class App {
   public static void main(String[] args) {
-
+        SessionFactory sf = new Configuration().configure().buildSessionFactory();
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
     VendingMachineImpl vm = new VendingMachineImpl();
@@ -85,6 +93,53 @@ public class App {
       DBHelper dbhelper = new DBHelper();
       dbhelper.removeOneItem(itemName);
       return gson.toJson("OK");
+    });
+
+
+    post("/machine/create/coin", (request, response) -> {
+      // Create coin
+      Gson gson = new Gson();
+      EntityManager session = sf.createEntityManager();
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+        DBCoin coin = (DBCoin) gson.fromJson(request.body(), DBCoin.class);
+
+        session.getTransaction().begin();
+        session.persist(coin);
+        session.getTransaction().commit();
+
+        return gson.toJson(coin);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+
+      }
+    });
+
+    post("/machine/create/item", (request, response) -> {
+      // Create coin
+      Gson gson = new Gson();
+      EntityManager session = sf.createEntityManager();
+      try {
+        request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(""));
+        DBItem item = (DBItem) gson.fromJson(request.body(), DBItem.class);
+
+        session.getTransaction().begin();
+        session.persist(item);
+        session.getTransaction().commit();
+
+        return gson.toJson(item);
+      } catch (Exception e) {
+        return "Error: " + e.getMessage();
+      } finally {
+        if (session.isOpen()) {
+          session.close();
+        }
+
+      }
     });
 
     options("/*",
