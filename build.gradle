@@ -47,6 +47,10 @@ clean << {
     project.file('app.jar').delete()
 }
 
+manifest {
+       attributes 'App': 'api.App'
+   }
+
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use jcenter for resolving your dependencies.
