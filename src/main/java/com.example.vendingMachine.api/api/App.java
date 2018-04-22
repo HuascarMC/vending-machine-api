@@ -16,6 +16,8 @@ import vendingMachine.components.Bucket;
 
 import java.util.Map;
 
+import java.lang.ProcessBuilder;
+
 import com.example.vendingMachine.api.VendingMachineImpl;
 
 import api.Tools.CorsFilter;
@@ -35,10 +37,22 @@ import java.util.List;
 
 public class App {
   public static void main(String[] args) {
-        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+
+    ProcessBuilder process = new ProcessBuilder();
+     Integer port;
+     if (process.environment().get("PORT") != null) {
+         port = Integer.parseInt(process.environment().get("PORT"));
+     } else {
+         port = 4567;
+     }
+
+setPort(port);
+    SessionFactory sf = new Configuration().configure().buildSessionFactory();
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
     VendingMachineImpl vm = new VendingMachineImpl();
+
+    get("/", (req, res) -> "Hello Heroku World");
 
     post("/order", (request, response) -> {
       // Create something
