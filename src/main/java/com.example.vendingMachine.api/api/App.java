@@ -57,7 +57,10 @@ public class App {
 
     corsFilter.apply();
 
-    get("/", (req, res) -> response.redirect("/index.html"));
+    get("/", (request, response) -> {
+      response.redirect("/index.html");
+      return "";
+    });
 
     post("/order", (request, response) -> {
       // Create something
