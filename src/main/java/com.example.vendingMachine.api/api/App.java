@@ -35,7 +35,7 @@ import java.util.List;
 
 public class App {
   public static void main(String[] args) {
-        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    SessionFactory sf = new Configuration().configure().buildSessionFactory();
     CorsFilter corsFilter = new CorsFilter();
     corsFilter.apply();
     VendingMachineImpl vm = new VendingMachineImpl();
