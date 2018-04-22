@@ -53,6 +53,7 @@ setPort(port);
     VendingMachineImpl vm = new VendingMachineImpl();
 
     get("/", (req, res) -> "Hello Heroku World");
+    get("/wakemydyno.txt", (req, res) -> "");
 
     post("/order", (request, response) -> {
       // Create something
