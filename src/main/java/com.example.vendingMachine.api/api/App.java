@@ -37,7 +37,7 @@ import java.util.List;
 
 public class App {
   public static void main(String[] args) {
-    
+
     ProcessBuilder process = new ProcessBuilder();
      Integer port;
      if (process.environment().get("PORT") != null) {
@@ -52,11 +52,7 @@ setPort(port);
     corsFilter.apply();
     VendingMachineImpl vm = new VendingMachineImpl();
 
-    post("/", (request, response) -> {
-      // Create something
-      Gson gson = new Gson();
-      return gson.toJson("The vending machine");
-    });
+    get("/", (req, res) -> "Hello Heroku World");
 
     post("/order", (request, response) -> {
       // Create something
