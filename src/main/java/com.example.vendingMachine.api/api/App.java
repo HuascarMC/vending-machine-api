@@ -39,20 +39,28 @@ public class App {
   public static void main(String[] args) {
 
     ProcessBuilder process = new ProcessBuilder();
-     Integer port;
-     if (process.environment().get("PORT") != null) {
-         port = Integer.parseInt(process.environment().get("PORT"));
-     } else {
-         port = 4567;
-     }
 
-setPort(port);
+    Integer port;
+    if (process.environment().get("PORT") != null) {
+      port = Integer.parseInt(process.environment().get("PORT"));
+    } else {
+      port = 4567;
+    }
+
+    staticFiles.location("/public");
+
+    setPort(port);
+
     SessionFactory sf = new Configuration().configure().buildSessionFactory();
     CorsFilter corsFilter = new CorsFilter();
-    corsFilter.apply();
     VendingMachineImpl vm = new VendingMachineImpl();
 
-    get("/", (req, res) -> "Hello Heroku World");
+    corsFilter.apply();
+
+    get("/", (request, response) -> {
+      response.redirect("/index.html");
+      return "";
+    });
 
     post("/order", (request, response) -> {
       // Create something
@@ -157,25 +165,25 @@ setPort(port);
     });
 
     options("/*",
-        (request, response) -> {
+    (request, response) -> {
 
-            String accessControlRequestHeaders = request
-                    .headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null) {
-                response.header("Access-Control-Allow-Headers",
-                        accessControlRequestHeaders);
-            }
+      String accessControlRequestHeaders = request
+      .headers("Access-Control-Request-Headers");
+      if (accessControlRequestHeaders != null) {
+        response.header("Access-Control-Allow-Headers",
+        accessControlRequestHeaders);
+      }
 
-            String accessControlRequestMethod = request
-                    .headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
-                response.header("Access-Control-Allow-Methods",
-                        accessControlRequestMethod);
-            }
+      String accessControlRequestMethod = request
+      .headers("Access-Control-Request-Method");
+      if (accessControlRequestMethod != null) {
+        response.header("Access-Control-Allow-Methods",
+        accessControlRequestMethod);
+      }
 
-            return "OK";
-        });
+      return "OK";
+    });
 
-// before((response) -> response.header("Access-Control-Allow-Origin"));
+    // before((response) -> response.header("Access-Control-Allow-Origin"));
   }
 }
