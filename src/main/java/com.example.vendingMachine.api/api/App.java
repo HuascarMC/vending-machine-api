@@ -40,6 +40,12 @@ public class App {
     corsFilter.apply();
     VendingMachineImpl vm = new VendingMachineImpl();
 
+    post("/", (request, response) -> {
+      // Create something
+      Gson gson = new Gson();
+      return gson.toJson("The vending machine");
+    });
+
     post("/order", (request, response) -> {
       // Create something
       Gson gson = new Gson();
