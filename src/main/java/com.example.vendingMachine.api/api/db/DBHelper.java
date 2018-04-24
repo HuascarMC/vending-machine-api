@@ -3,6 +3,7 @@ package api.db;
 import javax.persistence.EntityManager;
 
 import vendingMachine.Objects.Coin;
+import vendingMachine.Objects.Drink;
 
 import api.models.DBCoin;
 import api.models.DBItem;
@@ -28,6 +29,22 @@ public class DBHelper {
       result += coin.getValue();
     }
     return result;
+  }
+
+  public void add(String name) {
+    if(Drink.getDrinkByName(name) == null) {
+      addOneCoin(name);
+    } else {
+      addOneItem(name);
+    }
+  }
+
+  public void remove(String name) {
+    if(Drink.getDrinkByName(name) == null) {
+      removeOneCoin(name);
+    } else {
+      removeOneItem(name);
+    }
   }
 
   public boolean hasItem(String itemName) {
