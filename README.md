@@ -1,3 +1,7 @@
+# Running on the cloud with AWS
+
+## Click [here](https://vending-machine-server.herokuapp.com).
+
 ## Description
 
 RESTful API with a multiple set of routes to operate a vending machine.
