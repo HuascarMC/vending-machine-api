@@ -1,4 +1,4 @@
-# Running on the cloud with AWS
+# Running on the cloud with Heroku and DB with AWS
 
 ## Click [here](https://vending-machine-server.herokuapp.com).
 
