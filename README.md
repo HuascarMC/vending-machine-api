@@ -1,5 +1,5 @@
 # Running on the cloud with Heroku and DB with AWS
-
+Crashes with many connections on on cloud.
 ## Click [here](https://vending-machine-server.herokuapp.com).
 
 ## Description
