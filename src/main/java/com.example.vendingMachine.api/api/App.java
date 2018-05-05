@@ -105,7 +105,7 @@ public class App {
       Gson gson = new Gson();
       String coinName = (String) request.params(":coin") ;
       DBHelper dbhelper = new DBHelper();
-      dbhelper.removeOneCoin(coinName);
+      dbhelper.remove(coinName);
       return gson.toJson("OK");
     });
 
@@ -113,7 +113,7 @@ public class App {
       Gson gson = new Gson();
       String itemName = (String) request.params(":item") ;
       DBHelper dbhelper = new DBHelper();
-      dbhelper.removeOneItem(itemName);
+      dbhelper.remove(itemName);
       return gson.toJson("OK");
     });
 
