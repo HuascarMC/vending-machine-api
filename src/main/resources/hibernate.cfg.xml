@@ -7,7 +7,7 @@
       <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <property name="connection.url">jdbc:mysql://vending-machine.cb8c5ce7djal.eu-west-2.rds.amazonaws.com/inventory</property>
         <property name="hibernate.connection.username">username</property>
-        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.password">cb8c5ce7djal</property>
 
         <property name="show_sql">true</property>
 
